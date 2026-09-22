@@ -1,0 +1,2188 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="2007년 첫 아이폰부터 2025년 아이폰 17 Pro까지 51기종과 갤럭시 19기종을 비교합니다. 맞춤 추천 퀴즈, 스티브 잡스, iOS와 시리의 역사까지.">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="author" content="Beomjun">
+<meta property="og:title" content="iPhone picker">
+<meta property="og:description" content="2007 → 2025, 51개 기종 비교 + 맞춤 추천 퀴즈">
+<meta property="og:type" content="website">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>iPhone picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+  --ink:#1D1D1F; --ink-2:#56575C; --ink-3:#86868B;
+  --line:#D2D2D7; --line-2:#E8E8ED;
+  --accent:#0071E3; --accent-2:#0077ED; --accent-soft:#E9F2FE;
+  --ok:#0E7C6B; --ok-soft:#E2F1EF;
+  --old:#64748B; --old-soft:#EDF1F6;
+  --shadow:0 1px 2px rgba(0,0,0,.05), 0 10px 30px -14px rgba(0,0,0,.22);
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Pretendard Variable",Pretendard,"IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#151517; --surface-2:#1D1D1F;
+    --ink:#F5F5F7; --ink-2:#A1A1A6; --ink-3:#86868B;
+    --line:#333336; --line-2:#252528;
+    --accent:#2997FF; --accent-2:#5AAFFF; --accent-soft:#0E2038;
+    --ok:#4FD1B5; --ok-soft:#102724;
+    --old:#94A3B8; --old-soft:#1A2029;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#151517; --surface-2:#1D1D1F;
+  --ink:#F5F5F7; --ink-2:#A1A1A6; --ink-3:#86868B;
+  --line:#333336; --line-2:#252528;
+  --accent:#2997FF; --accent-2:#5AAFFF; --accent-soft:#0E2038;
+  --ok:#4FD1B5; --ok-soft:#102724;
+  --old:#94A3B8; --old-soft:#1A2029;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.62; letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:20px}
+h1,h2,h3{text-wrap:balance; margin:0; letter-spacing:-.02em; font-weight:600}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+.eyebrow{
+  font-family:var(--mono); font-size:11px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+}
+.num{font-family:var(--mono); font-variant-numeric:tabular-nums}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--line-2);
+}
+.topbar .wrap{display:flex; align-items:center; gap:18px; height:52px}
+.brand{font-weight:600; font-size:15px; letter-spacing:-.02em; white-space:nowrap; text-decoration:none; color:inherit}
+.brand b{color:var(--accent)}
+.navlinks{display:flex; gap:16px; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{
+  font-size:13px; color:var(--ink-2); text-decoration:none; white-space:nowrap;
+  padding:4px 0; border-bottom:1.5px solid transparent;
+}
+.navlinks a:hover{color:var(--ink); border-bottom-color:var(--accent)}
+
+/* ---------- 메뉴 ---------- */
+.menu{position:relative; margin-left:auto}
+.menubtn{display:flex; align-items:center; gap:9px; font-family:inherit; font-size:13.5px; font-weight:500;
+  color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:99px;
+  padding:7px 15px; cursor:pointer; transition:border-color .15s, color .15s}
+.menubtn:hover{border-color:var(--accent); color:var(--accent)}
+.menubtn i{display:block; width:7px; height:7px; margin-top:-3px; border-right:1.6px solid currentColor;
+  border-bottom:1.6px solid currentColor; transform:rotate(45deg); transition:transform .2s}
+.menubtn[aria-expanded="true"] i{transform:rotate(-135deg); margin-top:2px}
+/* 세로로 길게 늘어놓으면 폰 화면에서 아래가 잘립니다. 3열 격자로 담습니다 */
+.menupanel{position:absolute; right:0; top:calc(100% + 10px); z-index:60; width:min(408px, calc(100vw - 24px));
+  background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:8px;
+  box-shadow:0 18px 44px -14px rgba(0,0,0,.35);
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; animation:pop .18s ease both}
+.menupanel a{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  min-height:70px; padding:11px 6px; border-radius:10px; text-decoration:none; color:var(--ink);
+  border:1px solid transparent; text-align:center; transition:background .12s, border-color .12s}
+.menupanel a:hover{background:var(--surface-2); border-color:var(--line)}
+.menupanel a.on{background:var(--accent-soft); border-color:transparent}
+.menupanel a.on b{color:var(--accent)}
+.menupanel em{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-3); font-style:normal}
+.menupanel b{font-size:12.5px; font-weight:600; letter-spacing:-.025em; line-height:1.35; word-break:keep-all}
+@media (max-width:380px){ .menupanel{gap:5px; padding:7px} .menupanel a{min-height:64px; padding:9px 4px} .menupanel b{font-size:11.5px} }
+
+/* ---------- 홈 둘러보기 ---------- */
+.homegrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(228px,1fr)); gap:12px; margin-top:32px}
+.hcard{display:block; text-decoration:none; color:inherit; background:var(--surface);
+  border:1px solid var(--line); border-radius:12px; padding:17px;
+  transition:border-color .15s, transform .15s, box-shadow .15s}
+.hcard:hover{border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow)}
+.hcard em{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); font-style:normal}
+.hcard b{display:block; font-size:16px; font-weight:600; letter-spacing:-.025em; margin-top:7px}
+.hcard:hover b{color:var(--accent)}
+.hcard span{display:block; font-size:12.5px; color:var(--ink-2); font-weight:300; line-height:1.55; margin-top:5px}
+
+/* ---------- hero ---------- */
+.hero{padding-block:52px 4px}
+.hero h1{font-size:clamp(33px,6.2vw,56px); line-height:1.15; font-weight:700; letter-spacing:-.035em}
+.hero h1 em{font-style:normal; color:var(--accent)}
+.hero .lede{margin-top:18px; max-width:56ch; font-size:17px; color:var(--ink-2); font-weight:300}
+.facts{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:1px; margin-top:34px; background:var(--line); border:1px solid var(--line);
+  border-radius:10px; overflow:hidden;
+}
+.fact{background:var(--surface); padding:16px 18px}
+.fact .v{font-family:var(--mono); font-size:25px; font-weight:600; letter-spacing:-.03em; display:block; line-height:1.2}
+.fact .k{font-size:12px; color:var(--ink-3); margin-top:2px; display:block}
+
+/* ---------- sections ---------- */
+section{padding-block:46px 72px}
+.sechead{margin-bottom:28px}
+.sechead h2{font-size:clamp(23px,3.4vw,30px); margin-top:8px; letter-spacing:-.03em}
+.sechead p{color:var(--ink-2); font-size:15px; margin-top:8px; max-width:58ch; font-weight:300}
+.sechead p strong{color:var(--ink); font-weight:600}
+
+/* ---------- quiz ---------- */
+.quizbox{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.qtop{
+  display:flex; align-items:center; gap:12px; padding:14px 22px;
+  border-bottom:1px solid var(--line-2); background:var(--surface-2);
+}
+.qcount{font-family:var(--mono); font-size:12px; color:var(--ink-2); letter-spacing:.04em}
+.pips{display:flex; gap:5px; margin-left:auto}
+.pip{width:20px; height:3px; border-radius:2px; background:var(--line); transition:background .25s}
+.pip.done{background:var(--accent)}
+.pip.now{background:var(--accent); box-shadow:0 0 0 2px var(--accent-soft)}
+.qbody{padding:30px 22px 26px}
+.qtext{font-size:clamp(20px,3.2vw,25px); font-weight:600; letter-spacing:-.025em; line-height:1.4}
+.qhint{color:var(--ink-3); font-size:13.5px; margin-top:7px; font-weight:300}
+.opts{display:grid; gap:9px; margin-top:22px}
+.opt{
+  display:flex; align-items:baseline; gap:12px; width:100%; text-align:left;
+  font-family:inherit; font-size:15.5px; color:var(--ink); cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; transition:border-color .15s, background .15s, transform .08s;
+}
+.opt:hover{border-color:var(--accent); background:var(--accent-soft)}
+.opt:active{transform:scale(.995)}
+.opt .k{font-family:var(--mono); font-size:12px; color:var(--ink-3); flex:none; width:14px}
+.opt:hover .k{color:var(--accent)}
+.opt .t{font-weight:500}
+.opt .d{display:block; font-size:13px; color:var(--ink-2); font-weight:300; margin-top:2px}
+.qfoot{padding:0 22px 20px; display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+.linkbtn{
+  background:none; border:0; padding:0; font-family:inherit; font-size:13px;
+  color:var(--ink-3); cursor:pointer; text-decoration:underline; text-underline-offset:3px;
+}
+.linkbtn:hover{color:var(--accent)}
+
+/* ---------- result ---------- */
+.result{display:none}
+.result.on{display:block; animation:rise .4s ease both}
+@keyframes rise{from{opacity:.4; transform:translateY(8px)} to{opacity:1; transform:none}}
+.winner{
+  display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start;
+  padding:26px 22px; border-bottom:1px solid var(--line-2);
+}
+.wtag{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft); padding:4px 9px; border-radius:99px;
+  display:inline-block;
+}
+.winner h3{font-size:clamp(25px,4.4vw,35px); font-weight:700; letter-spacing:-.035em; margin-top:12px}
+.winner .why{margin-top:6px; color:var(--ink-2); font-size:15px; font-weight:300}
+.reasons{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:7px}
+.reasons li{position:relative; padding-left:20px; font-size:14.5px; color:var(--ink)}
+.reasons li::before{content:"→"; position:absolute; left:0; color:var(--accent); font-family:var(--mono); font-size:13px}
+.runners{padding:22px}
+.runners .eyebrow{margin-bottom:12px; display:block}
+.runner{display:grid; grid-template-columns:1fr auto; gap:6px 14px; padding:11px 0; border-top:1px solid var(--line-2)}
+.runner .rn{font-weight:500; font-size:15px}
+.runner .rd{font-size:13px; color:var(--ink-2); font-weight:300; grid-column:1/-1; margin-top:-4px}
+.bar{width:86px; height:6px; border-radius:99px; background:var(--line); overflow:hidden; align-self:center}
+.bar i{display:block; height:100%; background:var(--accent); border-radius:99px}
+.caveat{
+  margin:0 22px 14px; padding:12px 14px; background:var(--surface-2);
+  border-left:2px solid var(--accent); border-radius:0 6px 6px 0;
+  font-size:13px; color:var(--ink-2); font-weight:300;
+}
+.caveat.warn{border-left-color:var(--old); background:var(--old-soft)}
+.caveat strong{color:var(--ink); font-weight:500}
+
+/* ---------- phone glyph (SVG) ---------- */
+.phone{flex:none; line-height:0}
+.phone svg{display:block; max-width:100%; height:auto}
+
+/* ---------- index ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px}
+.chip{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.02em; cursor:pointer;
+  background:var(--surface); color:var(--ink-2); border:1px solid var(--line);
+  padding:6px 13px; border-radius:99px; transition:.15s;
+}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.count{font-size:13px; color:var(--ink-3); margin-bottom:16px; font-family:var(--mono)}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(286px,1fr)); gap:14px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px;
+  display:flex; flex-direction:column; gap:13px; cursor:pointer;
+  transition:border-color .15s, transform .15s, box-shadow .15s;
+}
+.card:hover{border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow)}
+.card .more{margin-top:auto; padding-top:4px; font-family:var(--mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3)}
+.card:hover .more{color:var(--accent)}
+.card.pick{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent)}
+.card .top{display:flex; gap:16px; align-items:flex-start}
+.card .name{font-size:17px; font-weight:600; letter-spacing:-.025em; line-height:1.3}
+.card .tagline{font-size:13px; color:var(--accent); margin-top:3px; font-weight:400}
+.card .desc{font-size:13.5px; color:var(--ink-2); font-weight:300; line-height:1.6}
+.spec{display:grid; grid-template-columns:auto 1fr; gap:4px 14px; font-size:13px; border-top:1px solid var(--line-2); padding-top:12px}
+.spec dt{color:var(--ink-3); font-size:12px}
+.spec dd{margin:0; font-family:var(--mono); font-size:12.5px; font-variant-numeric:tabular-nums}
+.spec dd.kr{font-family:var(--sans); font-size:13px; color:var(--ink-2); font-weight:300}
+.badges{display:flex; flex-wrap:wrap; gap:5px}
+.badge{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+  padding:3px 7px; border-radius:4px; background:var(--surface-2); color:var(--ink-2);
+  border:1px solid var(--line-2);
+}
+.badge.ai{background:var(--ok-soft); color:var(--ok); border-color:transparent}
+.badge.hz{background:var(--accent-soft); color:var(--accent); border-color:transparent}
+.badge.old{background:var(--old-soft); color:var(--old); border-color:transparent}
+
+/* ---------- 상세 창 ---------- */
+.modal{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:20px}
+.mbg{position:absolute; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(6px); animation:fade .2s ease both}
+.msheet{
+  position:relative; z-index:1; width:min(680px,100%); max-height:88vh; overflow-y:auto;
+  background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.45); padding:26px 26px 22px;
+  animation:pop .26s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes fade{from{opacity:0} to{opacity:1}}
+@keyframes pop{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:none}}
+.mclose{
+  position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:99px;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  font-size:13px; cursor:pointer; line-height:1; display:grid; place-items:center;
+}
+.mclose:hover{border-color:var(--accent); color:var(--accent)}
+.mhead{display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:start}
+.mart{display:flex; flex-direction:column; align-items:center; gap:9px}
+.mcap{font-size:10.5px; color:var(--ink-3); font-weight:300; text-align:center; max-width:160px; line-height:1.45}
+.mmeta h3{font-size:clamp(21px,3.6vw,27px); font-weight:700; letter-spacing:-.03em; margin-top:6px}
+.mtag{color:var(--accent); font-size:14px; margin-top:3px}
+.mmeta .badges{margin-top:13px}
+.mdesc{margin-top:15px; font-size:14.5px; color:var(--ink-2); font-weight:300; line-height:1.7}
+.mcols{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:24px; padding-top:20px; border-top:1px solid var(--line-2)}
+.plist{list-style:none; padding:0; margin:9px 0 0; display:grid; gap:6px}
+.plist li{position:relative; padding-left:17px; font-size:13.5px; color:var(--ink); line-height:1.55}
+.plist li::before{position:absolute; left:0; font-family:var(--mono); font-size:12px; font-weight:600}
+.plist.good li::before{content:"+"; color:var(--ok)}
+.plist.bad li::before{content:"−"; color:var(--old)}
+.mspec{margin-top:22px; gap:7px 18px}
+.mfoot{margin-top:22px; padding-top:18px; border-top:1px solid var(--line-2)}
+.mbtn{
+  width:100%; font-family:inherit; font-size:14px; font-weight:500; cursor:pointer;
+  background:var(--accent); color:#fff; border:0; border-radius:10px; padding:12px 16px;
+  transition:background .15s;
+}
+.mbtn:hover{background:var(--accent-2)}
+body.locked{overflow:hidden}
+@media (max-width:560px){
+  .modal{padding:0; align-items:flex-end}
+  .msheet{max-height:92vh; border-radius:18px 18px 0 0; padding:22px 18px calc(18px + env(safe-area-inset-bottom,0px))}
+  .mhead{grid-template-columns:1fr; justify-items:center}
+  .mcols{grid-template-columns:1fr; gap:16px}
+}
+
+/* ---------- 홈 화면 시작 버튼 ---------- */
+.cta{display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:28px}
+.ctabtn{font-family:inherit; font-size:15px; font-weight:500; cursor:pointer; color:#fff;
+  background:var(--accent); border:0; border-radius:99px; padding:13px 26px; transition:background .15s, transform .08s}
+.ctabtn:hover{background:var(--accent-2)}
+.ctabtn:active{transform:scale(.985)}
+.ctalink{font-size:14px; color:var(--accent); text-decoration:none}
+.ctalink:hover{text-decoration:underline; text-underline-offset:3px}
+
+/* ---------- 퀴즈 시작 화면 ---------- */
+.qbody.intro{padding:34px 22px 30px}
+.qbody.intro h3{font-size:clamp(20px,3.2vw,26px); font-weight:600; letter-spacing:-.03em}
+.qsteps{list-style:none; counter-reset:s; padding:0; margin:20px 0 0; display:grid; gap:8px; max-width:46ch}
+.qsteps li{counter-increment:s; position:relative; padding-left:30px; font-size:14.5px; color:var(--ink-2); font-weight:300}
+.qsteps li::before{content:counter(s); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:99px;
+  background:var(--accent-soft); color:var(--accent); font-family:var(--mono); font-size:11px; font-weight:600;
+  display:grid; place-items:center}
+.qintronote{margin-top:18px; font-size:13.5px; color:var(--ink-3); font-weight:300}
+.qstart{margin-top:22px; width:auto; padding:12px 24px; border-radius:99px}
+
+/* ---------- 스티브 잡스 ---------- */
+.jquote{margin:0; padding:26px 24px 22px; background:var(--surface); border:1px solid var(--line);
+  border-left:3px solid var(--accent); border-radius:0 14px 14px 0}
+.jquote p{font-size:clamp(18px,2.9vw,25px); font-weight:300; line-height:1.5; letter-spacing:-.025em}
+.jquote p em{font-style:normal; font-weight:600; color:var(--accent)}
+.jquote cite{display:block; margin-top:18px; font-style:normal; font-size:12.5px; color:var(--ink-3); line-height:1.65}
+.jquote cite b{color:var(--ink-2); font-weight:500}
+.jcols{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px}
+.jcard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px}
+.jcard > .eyebrow{display:block; margin-bottom:15px}
+.jlife{display:grid; gap:9px}
+.jlife div{display:grid; grid-template-columns:42px 1fr; gap:12px; font-size:13.5px; align-items:baseline}
+.jlife b{font-family:var(--mono); color:var(--accent); font-weight:600; font-size:12.5px}
+.jlife span{color:var(--ink-2); font-weight:300; line-height:1.55}
+.jsay{display:grid; gap:15px}
+.jsay figure{margin:0; padding-left:14px; border-left:2px solid var(--line)}
+.jsay q{display:block; font-size:14px; line-height:1.6; quotes:none}
+.jsay figcaption{margin-top:6px; font-size:11.5px; color:var(--ink-3); font-weight:300; line-height:1.5}
+.jphones{margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px}
+.jrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+.jitem{display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; background:none;
+  border:1px solid transparent; font-family:inherit; padding:10px 12px; border-radius:10px; transition:.15s}
+.jitem:hover{background:var(--surface-2); border-color:var(--line)}
+.jitem b{font-size:12.5px; font-weight:600; color:var(--ink)}
+.jitem span{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.jnote{margin-top:16px; padding-top:14px; border-top:1px solid var(--line-2); font-size:13px;
+  color:var(--ink-2); font-weight:300; line-height:1.75}
+.jnote b{color:var(--ink); font-weight:600}
+
+/* ---------- iOS의 역사 ---------- */
+.osgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(272px,1fr)); gap:12px}
+.oscard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 17px;
+  display:flex; flex-direction:column; gap:8px}
+.oshead{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
+.osver{font-family:var(--mono); font-size:15px; font-weight:600; letter-spacing:-.02em}
+.osyr{font-family:var(--mono); font-size:11.5px; color:var(--ink-3)}
+.oscard h3{font-size:14.5px; font-weight:600; letter-spacing:-.02em; color:var(--accent)}
+.oscard p{font-size:13px; color:var(--ink-2); font-weight:300; line-height:1.65}
+.oswith{margin-top:auto; padding-top:10px; border-top:1px solid var(--line-2); font-size:11.5px; color:var(--ink-3)}
+.oswith b{color:var(--ink-2); font-weight:500}
+@media (max-width:640px){ .jcols{grid-template-columns:1fr} }
+
+/* ---------- 시리의 역사 ---------- */
+.sirifact{background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:0 12px 12px 0; padding:18px 20px; margin-bottom:22px}
+.sirifact b{display:block; font-size:15px; font-weight:600; letter-spacing:-.02em}
+.sirifact p{font-size:13.5px; color:var(--ink-2); font-weight:300; line-height:1.75; margin-top:7px}
+.sirit{position:relative; padding-left:24px}
+.sirit::before{content:""; position:absolute; left:4px; top:8px; bottom:12px; width:2px; background:var(--line)}
+.siritem{position:relative; padding-bottom:24px}
+.siritem:last-child{padding-bottom:0}
+.siritem::before{content:""; position:absolute; left:-24px; top:5px; width:10px; height:10px; border-radius:99px;
+  background:var(--surface); border:2px solid var(--accent)}
+.siritem .yr{font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums}
+.siritem .ver{font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-left:8px}
+.siritem h3{font-size:15.5px; font-weight:600; letter-spacing:-.025em; margin-top:4px}
+.siritem p{font-size:13.5px; color:var(--ink-2); font-weight:300; line-height:1.75; margin-top:5px; max-width:62ch}
+
+/* ---------- 두께 비교 ---------- */
+.thick{padding:16px 18px 18px; border-top:1px solid var(--line-2)}
+.thick .eyebrow{display:block; margin-bottom:13px}
+.throw{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2.6fr) auto; gap:12px; align-items:center; margin-bottom:10px}
+.thname{font-size:12.5px; color:var(--ink-2); text-align:right; line-height:1.3; word-break:keep-all}
+.thbar{background:var(--accent); border-radius:4px; min-height:7px}
+.thbar.b{background:var(--ink-3)}
+.thval{font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums; min-width:58px; text-align:right}
+.thval small{display:block; font-size:10px; color:var(--ink-3); font-family:var(--sans); white-space:nowrap}
+.thnote{font-size:12px; color:var(--ink-2); font-weight:300; margin-top:6px}
+.thnote b{color:var(--accent); font-weight:600}
+@media (max-width:520px){ .throw{grid-template-columns:minmax(0,1fr) minmax(0,1.8fr) auto; gap:8px} .thname{font-size:11.5px} }
+
+/* ---------- table ---------- */
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-height:70vh}
+table{border-collapse:collapse; width:100%; min-width:980px; font-size:13.5px}
+th,td{padding:9px 14px; text-align:left; border-bottom:1px solid var(--line-2); white-space:nowrap}
+thead th{
+  position:sticky; top:0; background:var(--surface-2); z-index:1;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500;
+}
+tbody tr:hover{background:var(--surface-2)}
+tbody tr.dim td.nm{color:var(--old)}
+td.mono{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:12.5px}
+td.nm{font-weight:500}
+tbody tr:last-child td{border-bottom:0}
+
+/* ---------- timeline ---------- */
+.tl{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.tlrow{display:grid; grid-template-columns:76px 1fr; gap:18px; background:var(--surface); padding:15px 18px; align-items:baseline}
+.tlrow .yr{font-family:var(--mono); font-size:15px; font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums}
+.tlrow h3{font-size:15px; font-weight:600}
+.tlrow p{font-size:13.5px; color:var(--ink-2); font-weight:300; margin-top:3px; line-height:1.6}
+
+/* ---------- glossary ---------- */
+.gloss{display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.gitem{background:var(--surface); padding:18px}
+.gitem h3{font-size:15px; font-weight:600}
+.gitem .term{font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.06em; text-transform:uppercase}
+.gitem p{font-size:13.5px; color:var(--ink-2); margin-top:7px; font-weight:300; line-height:1.65}
+
+
+/* ---------- 맞대결 ---------- */
+.chiprow{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
+.chiprow .chips{margin-bottom:0}
+.chiprow .eyebrow{flex:none}
+.vsbox{background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; margin-top:10px}
+.vshead{display:grid; grid-template-columns:1fr auto 1fr; gap:12px; padding:20px 18px 22px; background:var(--surface-2); border-bottom:1px solid var(--line-2)}
+.vsside{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; min-width:0}
+.sel{width:100%; max-width:232px; font-family:var(--sans); font-size:13px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:7px 10px; cursor:pointer}
+.sel:hover{border-color:var(--accent)}
+.vsglyph{display:flex; align-items:flex-end; justify-content:center; min-height:110px}
+.vsname{font-size:15px; font-weight:600; letter-spacing:-.02em; line-height:1.3}
+.vstag{font-size:12px; color:var(--accent); font-weight:300; margin-top:-6px}
+.vsvs{font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.1em; color:var(--ink-3); align-self:center; padding-bottom:44px}
+.vsrows{padding:4px 18px 14px}
+.vsrow{display:grid; grid-template-columns:1fr 80px 1fr; gap:8px; align-items:center; padding:9px 0; border-top:1px solid var(--line-2)}
+.vsrow:first-child{border-top:0}
+.vsk{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); text-align:center}
+.vsval{font-size:13px; line-height:1.45; word-break:keep-all}
+.vsval.a{text-align:right}
+.vsval.b{text-align:left}
+.vsval.win{color:var(--accent); font-weight:600}
+.vsval .wn{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--accent); font-weight:500}
+.vsnote{grid-column:1/-1; text-align:center; font-size:11.5px; color:var(--ink-3); font-weight:300}
+.vssum{padding:15px 18px 18px; border-top:1px solid var(--line-2); background:var(--surface-2); display:grid; gap:7px}
+.sumrow{font-size:13.5px; color:var(--ink-2); font-weight:300}
+.sumrow b{color:var(--ink); font-weight:600}
+.sumrow i{font-style:normal; color:var(--accent); font-weight:500}
+@media (max-width:520px){
+  .vsrow{grid-template-columns:1fr 60px 1fr; gap:5px}
+  .vsval{font-size:12px}
+  .vshead{padding:16px 10px 18px; gap:5px}
+  .vsvs{padding-bottom:38px; font-size:11px}
+  .vsglyph{min-height:92px}
+}
+
+/* ---------- 피드백 ---------- */
+.fbform{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; display:grid; gap:15px}
+.fbfield{display:grid; gap:7px}
+.fbfield label{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.fbfield select, .fbfield input, .fbfield textarea{
+  width:100%; font-family:inherit; font-size:15px; color:var(--ink); background:var(--surface-2);
+  border:1px solid var(--line); border-radius:10px; padding:11px 13px; resize:vertical}
+.fbfield textarea{min-height:130px; line-height:1.65}
+.fbfield select:focus, .fbfield input:focus, .fbfield textarea:focus{border-color:var(--accent); outline:none}
+.fbrow{display:flex; flex-wrap:wrap; gap:10px}
+.fbbtn{font-family:inherit; font-size:14px; font-weight:500; cursor:pointer; color:#fff;
+  background:var(--accent); border:1px solid var(--accent); border-radius:99px; padding:11px 20px; transition:.15s}
+.fbbtn:hover{background:var(--accent-2); border-color:var(--accent-2)}
+.fbbtn.ghost{background:none; color:var(--accent)}
+.fbbtn.ghost:hover{background:var(--accent-soft)}
+.fbnote{margin-top:16px; padding:13px 15px; background:var(--surface-2); border-left:2px solid var(--accent);
+  border-radius:0 8px 8px 0; font-size:13.5px; color:var(--ink-2); font-weight:300; line-height:1.7}
+.fbnote.warn{border-left-color:var(--old); background:var(--old-soft)}
+.fbnote b{color:var(--ink); font-weight:600}
+.fbout{margin-top:12px; width:100%; font-family:var(--mono); font-size:12.5px; line-height:1.6;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:12px; min-height:120px}
+@media (max-width:520px){ .fbrow .fbbtn{width:100%} .fbfield select, .fbfield input, .fbfield textarea{font-size:16px} }
+
+/* ---------- 스마트폰 대응 ---------- */
+@media (max-width:560px){
+  /* 글자가 16px 미만이면 아이폰이 선택 상자를 누를 때 화면을 확대해 버립니다 */
+  .sel{font-size:16px; padding:9px 10px}
+  .tablewrap{max-height:none}
+  .msheet{padding-bottom:calc(22px + env(safe-area-inset-bottom, 0px))}
+}
+/* 터치 기기에서는 탭한 뒤에도 hover 효과가 남아 있어, 눌린 상태처럼 보입니다 */
+@media (hover: none){
+  .card:hover, .hcard:hover{transform:none; box-shadow:none; border-color:var(--line)}
+  .card:active, .hcard:active{border-color:var(--accent)}
+  .chip:hover{border-color:var(--line); color:var(--ink-2)}
+  .chip:active{border-color:var(--accent); color:var(--accent)}
+  .jitem:hover{background:none; border-color:transparent}
+  .menupanel a:hover{background:none}
+  .menupanel a.on:hover{background:var(--accent-soft)}
+  .hcard:hover b, .card:hover .more{color:inherit}
+}
+/* 손가락으로 누르기 좋은 크기 확보 */
+.menubtn{min-height:38px}
+.chip{min-height:34px}
+
+/* ---------- 만든 사람 ---------- */
+.sig{
+  position:fixed; left:12px; top:calc(env(safe-area-inset-top, 0px) + 62px);
+  z-index:40; user-select:none; cursor:pointer;
+  font-family:var(--mono); font-size:9px; letter-spacing:.09em;
+  /* 어두운 모드에선 흰색, 밝은 모드에선 검은색으로 자동으로 뒤집힙니다 */
+  color:var(--ink); background:none; border:0; padding:4px 6px;
+  transition:color .2s, opacity .2s; opacity:.75;
+}
+.sig:hover{color:var(--accent); opacity:1}
+@media (max-width:520px){ .sig{font-size:8px; left:10px; top:calc(env(safe-area-inset-top, 0px) + 58px)} }
+
+/* ---------- 이스터에그 ---------- */
+.egg{position:fixed; inset:0; z-index:110; display:flex; align-items:center; justify-content:center; padding:20px}
+.eggbg{position:absolute; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(8px); animation:fade .2s ease both}
+.eggsheet{position:relative; z-index:1; width:min(620px,100%); max-height:88vh; overflow-y:auto;
+  background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px 24px 22px;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.5); animation:pop .3s cubic-bezier(.2,.9,.3,1) both}
+.eggclose{position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:99px;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  font-size:13px; cursor:pointer; line-height:1; display:grid; place-items:center}
+.eggclose:hover{border-color:var(--accent); color:var(--accent)}
+.egghead{margin-bottom:22px}
+.egghead .eyebrow{display:block}
+.egghead h3{font-size:clamp(21px,3.6vw,28px); font-weight:700; letter-spacing:-.03em; margin-top:8px}
+.egghead p{font-size:13.5px; color:var(--ink-2); font-weight:300; margin-top:6px}
+.egggrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px}
+.eggitem{display:grid; grid-template-columns:48px 1fr; gap:13px; align-items:center;
+  background:var(--surface-2); border:1px solid var(--line-2); border-radius:11px; padding:12px 13px}
+.eggitem svg{display:block}
+.eggitem b{display:block; font-size:14px; font-weight:600; letter-spacing:-.02em}
+.eggitem span{display:block; font-size:12px; color:var(--ink-2); font-weight:300; line-height:1.5; margin-top:3px}
+.eggfoot{margin-top:20px; padding-top:16px; border-top:1px solid var(--line-2);
+  font-size:12.5px; color:var(--ink-3); font-weight:300; line-height:1.7}
+@media (max-width:560px){
+  .egg{padding:0; align-items:flex-end}
+  .eggsheet{max-height:92vh; border-radius:18px 18px 0 0; padding:22px 18px calc(18px + env(safe-area-inset-bottom,0px))}
+  .egggrid{grid-template-columns:1fr}
+}
+
+footer{padding-block:34px 48px; color:var(--ink-3); font-size:12.5px; font-weight:300; line-height:1.8}
+footer strong{color:var(--ink-2); font-weight:500}
+
+@media (max-width:560px){
+  .winner{grid-template-columns:1fr; gap:18px}
+  .hero{padding-block:40px 32px}
+  section{padding-block:44px}
+  .tlrow{grid-template-columns:1fr; gap:2px}
+}
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#home">아이폰 <b>고르기</b></a>
+    <div class="menu">
+      <button class="menubtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+        <span id="menuLabel">홈</span><i></i>
+      </button>
+      <nav class="menupanel" id="menuPanel" hidden></nav>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="home">
+  <div class="hero">
+    <span class="eyebrow">iPhone 1세대 → 17 · 51기종 + Galaxy 19기종</span>
+    <h1>홈버튼에서<br><em>8배 망원</em>까지.</h1>
+    <p class="lede">2007년의 첫 아이폰. 2025년의 17 Pro. 그 사이에 놓인 51개의 기종.
+      크기도, 무게도, 두께도, 카메라도 전부 나란히 놓았습니다. 질문 여섯 개면 그중 하나가 남습니다.</p>
+    <div class="cta">
+      <button class="ctabtn" id="heroStart" type="button">맞춤 아이폰 고르기 →</button>
+      <a class="ctalink" href="#index">51개 기종 먼저 둘러보기 →</a>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="v">51</span><span class="k">비교하는 기종 수</span></div>
+      <div class="fact"><span class="v">18년</span><span class="k">2007 → 2025</span></div>
+      <div class="fact"><span class="v">3.5″–6.9″</span><span class="k">화면 크기 범위</span></div>
+      <div class="fact"><span class="v">112–240g</span><span class="k">무게 범위</span></div>
+      <div class="fact"><span class="v">7–39h</span><span class="k">영상 재생 시간</span></div>
+    </div>
+    <div class="homegrid" id="homegrid"></div>
+  </div>
+  </section>
+
+  <section id="quiz">
+    <div class="sechead">
+      <span class="eyebrow">01 — 추천 퀴즈</span>
+      <h2>질문은 여섯 개.</h2>
+      <p>정답은 없습니다. 끌리는 쪽으로. 빈티지 감성파를 위한 질문도 따로 있습니다.</p>
+    </div>
+
+    <div class="quizbox">
+      <div class="qtop">
+        <span class="qcount" id="qcount">질문 1 / 5</span>
+        <div class="pips" id="pips"></div>
+      </div>
+
+      <div id="qintro">
+        <div class="qbody intro">
+          <h3>여섯 가지면 충분합니다.</h3>
+          <ol class="qsteps">
+            <li>어떤 시대의 아이폰이 좋은지</li>
+            <li>가격은 어떤 쪽이 좋은지</li>
+            <li>화면 크기는 어느 정도가 좋은지</li>
+            <li>무게와 배터리 중 어느 쪽이 중요한지</li>
+            <li>사진과 영상이 얼마나 중요한지</li>
+            <li>게임은 얼마나 하는지</li>
+          </ol>
+          <p class="qintronote">51개 기종에 하나하나 점수를 매깁니다. 남는 건 한 대.<br>빈티지를 고르시면 질문이 하나 더 나옵니다.</p>
+          <button class="mbtn qstart" id="startBtn" type="button">퀴즈 시작하기 →</button>
+        </div>
+      </div>
+
+      <div id="qstage" hidden>
+        <div class="qbody">
+          <div class="qtext" id="qtext"></div>
+          <div class="qhint" id="qhint"></div>
+          <div class="opts" id="opts"></div>
+        </div>
+        <div class="qfoot">
+          <button class="linkbtn" id="backBtn" hidden>← 이전 질문</button>
+          <button class="linkbtn" id="resetBtn" hidden>처음부터</button>
+        </div>
+      </div>
+
+      <div class="result" id="result">
+        <div class="winner">
+          <div id="winPhone"></div>
+          <div>
+            <span class="wtag">당신에게 맞는 한 대</span>
+            <h3 id="winName"></h3>
+            <p class="why" id="winWhy"></p>
+            <ul class="reasons" id="winReasons"></ul>
+          </div>
+        </div>
+        <div class="runners">
+          <span class="eyebrow">다른 선택지</span>
+          <div id="runners"></div>
+        </div>
+        <div id="oldWarn"></div>
+        <p class="caveat">가격은 <strong>한국 출시가</strong> 기준입니다. 오래된 기종일수록 중고와 리퍼로 크게 내려갑니다. 살 때는 지금 가격을 다시 확인하세요.</p>
+        <div class="qfoot"><button class="linkbtn" id="again">↻ 다시 해보기</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="index">
+    <div class="sechead">
+      <span class="eyebrow">02 — 기종 도감</span>
+      <h2>51개 기종. 하나씩 전부.</h2>
+      <p>앞면과 뒷면. 실제 화면 크기 비율 그대로. 카메라 배치까지 기종마다 다릅니다. <strong>카드를 누르면</strong> 더 자세히.</p>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="count" id="count"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="versus">
+    <div class="sechead">
+      <span class="eyebrow">03 — 맞대결</span>
+      <h2>둘을 나란히.</h2>
+      <p>아이폰끼리. 또는 비슷한 값의 갤럭시와. 크기도 두께도 눈으로 바로 보입니다.</p>
+    </div>
+
+    <div class="chiprow"><span class="eyebrow">비교 모드</span><div class="chips" id="vsmode"></div></div>
+    <div class="chiprow"><span class="eyebrow">라이벌 대결</span><div class="chips" id="presets"></div></div>
+
+    <div class="vsbox">
+      <div class="vshead">
+        <div class="vsside">
+          <select id="selA" class="sel" aria-label="왼쪽 기기 고르기"></select>
+          <div class="vsglyph" id="glyphA"></div>
+          <div class="vsname" id="nameA"></div>
+          <div class="vstag" id="tagA"></div>
+        </div>
+        <div class="vsvs">VS</div>
+        <div class="vsside">
+          <select id="selB" class="sel" aria-label="오른쪽 기기 고르기"></select>
+          <div class="vsglyph" id="glyphB"></div>
+          <div class="vsname" id="nameB"></div>
+          <div class="vstag" id="tagB"></div>
+        </div>
+      </div>
+      <div class="thick" id="thick"></div>
+      <div class="vsrows" id="vsrows"></div>
+      <div class="vssum" id="vssum"></div>
+    </div>
+  </section>
+
+  <section id="jobs">
+    <div class="sechead">
+      <span class="eyebrow">04 — 스티브 잡스</span>
+      <h2>"오늘, 애플이 전화를 재발명합니다."</h2>
+      <p>2007년 1월 9일. 검은 터틀넥을 입은 한 사람이 무대에 올라, 주머니에서 이것을 꺼냈습니다.</p>
+    </div>
+
+    <blockquote class="jquote">
+      <p>아이팟, 전화기, 그리고 인터넷 단말기.<br>
+        감이 오시나요? 이건 <em>세 개의 기기가 아닙니다.</em> 하나의 기기입니다.</p>
+      <cite>An iPod, a phone, and an internet communicator… Are you getting it?
+        These are not three separate devices, this is one device.<br>
+        <b>— 스티브 잡스, 2007년 1월 맥월드 기조연설</b></cite>
+    </blockquote>
+
+    <div class="jcols">
+      <div class="jcard">
+        <span class="eyebrow">그가 걸어온 길</span>
+        <div class="jlife" id="jlife"></div>
+      </div>
+      <div class="jcard">
+        <span class="eyebrow">그가 남긴 말</span>
+        <div class="jsay" id="jsay"></div>
+      </div>
+    </div>
+
+    <div class="jphones">
+      <span class="eyebrow">그가 직접 무대에서 소개한 아이폰</span>
+      <div class="jrow" id="jphones"></div>
+      <p class="jnote">네 대가 전부입니다. 다섯 번째인 <b>아이폰 4S</b>는 2011년 10월 4일 팀 쿡이 발표했고,
+        스티브 잡스는 <b>바로 다음 날</b> 세상을 떠났습니다. 4S의 S가 Steve를 뜻한다는 이야기가 퍼진 것도 그래서입니다.
+        (애플이 공식으로 밝힌 적은 없습니다.)</p>
+    </div>
+  </section>
+
+  <section id="history">
+    <div class="sechead">
+      <span class="eyebrow">05 — 아이폰 연대기</span>
+      <h2>그해, 처음 등장한 것들.</h2>
+      <p>지금은 당연한 기능들도 전부 어느 해엔가 처음이었습니다.</p>
+    </div>
+    <div class="tl" id="tl"></div>
+  </section>
+
+  <section id="ios">
+    <div class="sechead">
+      <span class="eyebrow">06 — iOS의 역사</span>
+      <h2>같은 아이폰, 다른 세상.</h2>
+      <p>아이폰을 바꾼 건 부품만이 아닙니다. 2007년의 iPhone OS 1에는 앱스토어도, 복사·붙여넣기도 없었습니다.</p>
+    </div>
+    <div class="osgrid" id="osgrid"></div>
+  </section>
+
+  <section id="siri">
+    <div class="sechead">
+      <span class="eyebrow">07 — 시리의 역사</span>
+      <h2>"시리야."</h2>
+      <p>2011년, 아이폰이 처음으로 사람 말을 알아들었습니다. 그 뒤로 시리가 배운 것들.</p>
+    </div>
+    <div class="sirifact">
+      <b>시리라는 이름은 어디서 왔을까요</b>
+      <p>노르웨이 이름입니다. 뜻은 "승리로 이끄는 아름다운 여인". 시리를 만든 닥 키틀로스가
+        딸이 태어나면 붙여 주려고 아껴 둔 이름이었는데, 아들이 태어나는 바람에 자기가 만든
+        프로그램에 붙였다고 합니다.</p>
+    </div>
+    <div class="sirit" id="sirit"></div>
+  </section>
+
+  <section id="compare">
+    <div class="sechead">
+      <span class="eyebrow">08 — 한눈에 비교</span>
+      <h2>숫자로 전부.</h2>
+      <p>51개 기종, 13개 항목. 배터리는 애플이 밝힌 영상 재생 시간 기준. 흐린 이름은 iOS 업데이트가 끝난 기종입니다.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>기종</th><th>출시</th><th>화면</th><th>무게</th><th>두께</th><th>칩</th><th>주사율</th>
+          <th>카메라</th><th>망원</th><th>배터리</th><th>단자</th><th>iOS</th><th>출시가</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="words">
+    <div class="sechead">
+      <span class="eyebrow">09 — 용어 사전</span>
+      <h2>어려운 말, 쉽게.</h2>
+      <p>스펙 표에 자꾸 나오는 말들. 여기 다 있습니다.</p>
+    </div>
+    <div class="gloss">
+      <div class="gitem"><span class="term">ProMotion</span><h3>프로모션 (120Hz)</h3>
+        <p>화면이 1초에 몇 번 새로 그려지는지를 주사율이라고 합니다. 보통은 60번(60Hz)이고 120Hz는 그 두 배입니다. 스크롤하거나 게임할 때 훨씬 부드럽게 느껴집니다.</p></div>
+      <div class="gitem"><span class="term">Touch ID · Face ID</span><h3>지문 · 얼굴 인식</h3>
+        <p>홈버튼에 손가락을 대는 방식이 터치 ID입니다(아이폰 5s~8, SE 전부). 아이폰 X부터는 얼굴을 보고 푸는 페이스 ID로 바뀌면서 홈버튼이 사라졌습니다.</p></div>
+      <div class="gitem"><span class="term">Dynamic Island</span><h3>다이내믹 아일랜드</h3>
+        <p>화면 위쪽의 검은 알약 모양입니다. 원래는 카메라가 차지하는 공간인데, 애플이 여기에 음악·타이머·배달 상황 등을 띄워 쓸모 있게 바꿨습니다. 아이폰 14 Pro부터 들어갔습니다.</p></div>
+      <div class="gitem"><span class="term">A-series chip</span><h3>A칩 (A8 → A19)</h3>
+        <p>아이폰의 두뇌입니다. 숫자가 클수록 새것이고, 그만큼 빠릅니다. 뒤에 <span class="num">Pro</span>가 붙으면 게임 그래픽을 담당하는 부분이 더 강합니다.</p></div>
+      <div class="gitem"><span class="term">MP · Telephoto</span><h3>48MP · 망원 몇 배</h3>
+        <p>MP(메가픽셀)는 사진의 촘촘한 정도입니다. 48MP라면 크게 잘라내도 깨지지 않습니다. 망원 5배는 멀리 있는 것을 5배로 당겨 찍는 렌즈인데, 디지털로 늘린 것이 아니라 실제 렌즈라 더 선명합니다.</p></div>
+      <div class="gitem"><span class="term">Apple Intelligence</span><h3>애플 인텔리전스</h3>
+        <p>글 다듬기, 사진에서 물건 지우기 같은 AI 기능입니다. 칩이 빨라야 작동하기 때문에 <span class="num">아이폰 15 Pro</span> 이상에서만 지원합니다. 15·14 같은 기본 모델은 지원하지 않습니다.</p></div>
+      <div class="gitem"><span class="term">USB-C · Lightning</span><h3>충전 단자</h3>
+        <p>아이폰 5~14는 애플 전용 라이트닝이고, 15부터는 USB-C입니다. USB-C면 아이패드·닌텐도 스위치·안드로이드와 케이블을 함께 쓸 수 있습니다.</p></div>
+      <div class="gitem"><span class="term">End of support</span><h3>iOS 업데이트 종료</h3>
+        <p>아이폰은 보통 5~7년 동안 새 iOS를 받습니다. 업데이트가 끝나면 새로 나온 앱이 설치되지 않거나 보안이 약해집니다. 그래도 음악·카메라·시계용 서브폰으로는 충분히 쓸 만합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="feedback">
+    <div class="sechead">
+      <span class="eyebrow">10 — 피드백</span>
+      <h2>어떠셨나요?</h2>
+      <p>고치면 좋을 점도, 좋았던 점도. 전부 환영합니다. 적고 <strong>복사</strong>를 누르면 그대로 붙여넣어 보낼 수 있게 정리됩니다.</p>
+    </div>
+    <div class="fbform">
+      <div class="fbfield">
+        <label for="fbTopic">어떤 이야기인가요</label>
+        <select id="fbTopic"></select>
+      </div>
+      <div class="fbfield">
+        <label for="fbName">이름 · 안 써도 됩니다</label>
+        <input id="fbName" type="text" maxlength="20" placeholder="누가 남겼는지 알 수 있게">
+      </div>
+      <div class="fbfield">
+        <label for="fbText">하고 싶은 말</label>
+        <textarea id="fbText" maxlength="1000" placeholder="좋았던 점도, 고칠 점도 편하게."></textarea>
+      </div>
+      <div class="fbrow">
+        <button class="fbbtn" id="fbCopy" type="button">의견 복사하기</button>
+        <button class="fbbtn ghost" id="fbComment" type="button" hidden>댓글로 남기기</button>
+      </div>
+    </div>
+    <div id="fbnote"></div>
+    <textarea class="fbout" id="fbout" readonly hidden></textarea>
+  </section>
+
+  <footer>
+    <p><strong>만든 사람의 메모</strong> — 스펙은 애플과 삼성이 공식으로 밝힌 값입니다.
+      화면 크기, 무게, 두께, 영상 재생 시간, mAh. 가격은 한국 출시가 기준.
+      중고 시세와 통신사 할인, 지금 파는지 여부는 직접 확인해야 합니다.<br>
+      추천 결과는 답변에 점수를 매겨 계산한 값입니다. 참고일 뿐입니다. 가장 확실한 건 직접 손에 쥐어 보는 것.</p>
+  </footer>
+</div>
+
+<button class="sig" id="sig" type="button" aria-label="만든 사람">made by Beomjun</button>
+
+<div class="egg" id="egg" hidden>
+  <div class="eggbg" id="eggbg"></div>
+  <div class="eggsheet" role="dialog" aria-modal="true" aria-labelledby="eggTitle">
+    <button class="eggclose" id="eggclose" type="button" aria-label="닫기">&#10005;</button>
+    <div class="egghead">
+      <span class="eyebrow">🥚 찾으셨네요</span>
+      <h3 id="eggTitle">범준의 애플 컬렉션</h3>
+      <p id="eggSub"></p>
+    </div>
+    <div class="egggrid" id="egggrid"></div>
+    <p class="eggfoot">이 사이트를 만든 사람이 실제로 쓰고 있거나, 거쳐 온 기기들입니다.<br>
+      아이폰 5부터 17까지 — 이 도감에 실린 기종을 직접 만져 본 셈입니다.</p>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="mbg" id="mbg"></div>
+  <div class="msheet" role="dialog" aria-modal="true" aria-labelledby="mname">
+    <button class="mclose" id="mclose" type="button" aria-label="닫기">&#10005;</button>
+    <div class="mhead">
+      <div class="mart">
+        <div id="mart"></div>
+        <span class="mcap">실제 크기 비율로 그린 일러스트입니다 (사진 아님)</span>
+      </div>
+      <div class="mmeta">
+        <span class="eyebrow" id="myear"></span>
+        <h3 id="mname"></h3>
+        <p class="mtag" id="mtag"></p>
+        <div class="badges" id="mbadges"></div>
+        <p class="mdesc" id="mdesc"></p>
+      </div>
+    </div>
+    <div class="mcols">
+      <div><span class="eyebrow">좋은 점</span><ul class="plist good" id="mgood"></ul></div>
+      <div><span class="eyebrow">아쉬운 점</span><ul class="plist bad" id="mbad"></ul></div>
+    </div>
+    <dl class="spec mspec" id="mspec"></dl>
+    <div class="mfoot">
+      <button class="mbtn" id="mvs" type="button">이 기종으로 맞대결 하기 &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* inch/무게/배터리 점수는 실제 값에서 바로 계산한다 */
+const sz = m => (m.inch - 4.0) / 2.9 * 10;        // 4.0인치 → 0, 6.9인치 → 10
+const lt = m => 10 - (m.g - 112) / 128 * 9;       // 112g → 10, 240g → 1
+const bt = m => 1 + (m.batt - 7) / 32 * 9;        // 7시간 → 1, 39시간 → 10
+
+const M = [
+/* ===== 오리지널 2007–2011 · 스티브 잡스가 살아 있던 시절 ===== */
+{id:'2g',n:'iPhone (1세대)',era:'origin',se:false,home:true,y:2007,inch:3.5,g:135,mm:11.6,r:0.53,chip:'Samsung ARM11 412MHz',hz:60,lens:1,isl:'home',cam:'2MP 싱글 (동영상 촬영 불가)',zoom:'망원 없음',batt:7,price:46,pn:'미국 $499 · 한국 미출시',port:'30핀 독 커넥터',ai:false,ios:'iPhone OS 3.1.3까지',live:false,
+ c:0.5,z:1,p:0.2,t:1,tag:'모든 것의 시작',
+ desc:'"오늘 애플이 전화를 재발명합니다." 2007년 1월, 그 말과 함께 주머니에서 나온 기기. 앱스토어도, 복사·붙여넣기도 없었습니다. 그래도 손가락으로 화면을 미는 방식은 여기서 시작됐습니다.',
+ good:['세상을 바꾼 첫 스마트폰','지금 스마트폰 조작 방식의 원형'],bad:['앱스토어도 3G도 없음','한국 미출시']},
+{id:'3g',n:'iPhone 3G',era:'origin',se:false,home:true,y:2008,inch:3.5,g:133,mm:12.3,r:0.53,chip:'Samsung ARM11 412MHz',hz:60,lens:1,isl:'home',cam:'2MP 싱글 (동영상 촬영 불가)',zoom:'망원 없음',batt:7,price:60,pn:'미국 $599 상당 · 한국 미출시',port:'30핀 독 커넥터',ai:false,ios:'iOS 4.2.1까지',live:false,
+ c:0.8,z:1,p:0.2,t:1,tag:'앱스토어가 열린 해',
+ desc:'앱스토어가 문을 연 기종입니다. 남이 만든 앱을 내려받아 쓴다는 개념이 이때 처음 생겼고, 스마트폰의 판도가 완전히 바뀌었습니다.',
+ good:['앱스토어와 함께 출시','3G와 GPS 지원'],bad:['카메라는 여전히 2MP. 동영상 불가','한국 미출시']},
+{id:'3gs',n:'iPhone 3GS',era:'origin',se:false,home:true,y:2009,inch:3.5,g:135,mm:12.3,r:0.53,chip:'ARM Cortex-A8 600MHz',hz:60,lens:1,isl:'home',cam:'3MP 싱글 (동영상 촬영 가능)',zoom:'망원 없음',batt:10,price:81,port:'30핀 독 커넥터',ai:false,ios:'iOS 6.1.6까지',live:false,
+ c:1.2,z:1,p:0.3,t:1,tag:'한국에 처음 온 아이폰',
+ desc:'2009년 11월, 한국에 정식 출시된 첫 아이폰입니다. 이름의 S는 Speed를 뜻하고, 드디어 동영상 촬영이 가능해졌습니다.',
+ good:['한국 정식 출시 1호 아이폰','동영상 촬영과 음성 제어 추가'],bad:['플라스틱 뒷면이라 잘 긁힘','iOS 6에서 멈춤']},
+{id:'4',n:'iPhone 4',era:'origin',se:false,home:true,y:2010,inch:3.5,g:137,mm:9.3,r:0.51,chip:'Apple A4',hz:60,lens:1,isl:'home',cam:'5MP + 전면 카메라 (페이스타임)',zoom:'망원 없음',batt:10,price:81,port:'30핀 독 커넥터',ai:false,ios:'iOS 7.1.2까지',live:false,
+ c:1.8,z:1,p:0.35,t:1,tag:'레티나 디스플레이의 등장',
+ desc:'화소가 눈에 보이지 않는 화면. 그래서 레티나라는 이름이 붙었습니다. 애플이 직접 만든 첫 칩 A4, 그리고 첫 전면 카메라.',
+ good:['레티나 디스플레이 최초','전면 카메라와 페이스타임 최초','애플 자체 설계 A4 칩'],bad:['손으로 쥐면 전파가 약해지는 논란','앞뒤가 유리라 잘 깨짐']},
+{id:'4s',n:'iPhone 4S',era:'origin',se:false,home:true,y:2011,inch:3.5,g:140,mm:9.3,r:0.51,chip:'Apple A5',hz:60,lens:1,isl:'home',cam:'8MP + 1080p 영상',zoom:'망원 없음',batt:10,price:81,port:'30핀 독 커넥터',ai:false,ios:'iOS 9.3.6까지',live:false,
+ c:2.2,z:1,p:0.5,t:1,tag:'시리가 처음 말을 걸다',
+ desc:'음성 비서 시리가 처음 들어간 기종입니다. 발표는 2011년 10월 4일 팀 쿡이 했고, 스티브 잡스는 그 다음 날 세상을 떠났습니다.',
+ good:['시리 최초 탑재','8MP 카메라와 1080p 영상 촬영'],bad:['디자인은 iPhone 4와 판박이','iOS 9에서 멈춤']},
+{id:'5',n:'iPhone 5',era:'origin',se:false,home:true,y:2012,inch:4.0,g:112,mm:7.6,r:0.49,chip:'Apple A6',hz:60,lens:1,isl:'home',cam:'8MP 싱글',zoom:'망원 없음',batt:10,price:81,port:'Lightning',ai:false,ios:'iOS 10.3.4까지',live:false,
+ c:2.4,z:1,p:0.7,t:1,tag:'라이트닝과 4인치의 시작',
+ desc:'화면이 처음으로 길어져 4인치가 됐고, 30핀 독 커넥터가 라이트닝으로 바뀐 기종입니다. 112g으로 아이폰 중 가장 가볍습니다.',
+ good:['역대 아이폰 최경량, 112g','라이트닝 단자와 4인치 화면 최초'],bad:['라이트닝 전환으로 기존 액세서리 사용 불가','알루미늄 모서리가 잘 까짐']},
+{id:'5c',n:'iPhone 5c',era:'origin',se:false,home:true,y:2013,inch:4.0,g:132,mm:9.0,r:0.49,chip:'Apple A6',hz:60,lens:1,isl:'home',cam:'8MP 싱글',zoom:'망원 없음',batt:10,price:52,port:'Lightning',ai:false,ios:'iOS 10.3.4까지',live:false,
+ c:2.4,z:1,p:0.7,t:1,tag:'단 하나뿐인 알록달록 아이폰',
+ desc:'아이폰 5의 속을 플라스틱 몸에 담아 값을 낮춘 기종입니다. 흰색·분홍·노랑·파랑·초록 다섯 가지 색으로 나온, 아이폰 역사상 유일한 컬러 플라스틱 모델입니다.',
+ good:['흰색, 분홍, 노랑, 파랑, 초록','당시 가장 저렴한 아이폰'],bad:['플라스틱이라 고급스럽지 않다는 평','터치 ID 없음']},
+{id:'5s',n:'iPhone 5s',era:'origin',se:false,home:true,y:2013,inch:4.0,g:112,mm:7.6,r:0.49,chip:'Apple A7',hz:60,lens:1,isl:'home',cam:'8MP 싱글',zoom:'망원 없음',batt:10,price:81,port:'Lightning',ai:false,ios:'iOS 12.5.7까지',live:false,
+ c:2.6,z:1,p:0.9,t:1,tag:'지문으로 잠금을 푼 첫 아이폰',
+ desc:'홈버튼에 손가락을 대면 잠금이 풀리는 터치 ID가 처음 들어갔습니다. 스마트폰 최초의 64비트 칩(A7)을 넣어 성능도 크게 뛰었습니다.',
+ good:['터치 ID 지문 인식 최초','스마트폰 최초의 64비트 칩','iOS 12까지 6년간 업데이트'],bad:['화면이 4인치로 작음','iOS 12에서 멈춤']},
+
+/* ===== 빈티지 2014–2017 ===== */
+{id:'6',n:'iPhone 6',era:'vintage',se:false,home:true,y:2014,inch:4.7,g:129,mm:6.9,chip:'A8',hz:60,lens:1,isl:'home',cam:'8MP 싱글',zoom:'망원 없음',batt:11,price:79,port:'Lightning',ai:false,ios:'iOS 12까지',live:false,
+ c:1,z:1,p:0.5,t:1,tag:'둥근 알루미늄의 상징',
+ desc:'화면이 처음 커진 아이폰. 둥글게 깎아 낸 알루미늄 한 덩어리. 그 디자인만큼은 지금도 회자됩니다.',
+ good:['129g. 지금 기준으로도 가벼운 무게','홈버튼 + 알루미늄 빈티지 디자인'],bad:['iOS 12에서 멈춤. 요즘 앱이 거의 안 깔림','카메라는 8MP. 화질은 아쉬움']},
+{id:'6p',n:'iPhone 6 Plus',era:'vintage',se:false,home:true,y:2014,inch:5.5,g:172,mm:7.1,chip:'A8',hz:60,lens:1,isl:'home',cam:'8MP 싱글 (광학식 손떨림 보정)',zoom:'망원 없음',batt:14,price:92,port:'Lightning',ai:false,ios:'iOS 12까지',live:false,
+ c:1.3,z:1,p:0.5,t:1,tag:'애플의 첫 대화면',
+ desc:'애플이 처음으로 5.5인치 큰 화면을 낸 모델입니다. "아이폰은 작아야 한다"는 규칙이 여기서 깨졌습니다.',
+ good:['애플이 처음으로 인정한 큰 화면','손떨림 보정 첫 탑재'],bad:['iOS 12에서 멈춤','얇아서 휘어진다는 논란이 있었음']},
+{id:'6s',n:'iPhone 6s',era:'vintage',se:false,home:true,y:2015,inch:4.7,g:143,mm:7.1,chip:'A9',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:11,price:86,port:'Lightning',ai:false,ios:'iOS 15까지',live:false,
+ c:2,z:1,p:1,t:1,tag:'세게 누르면 반응하는 화면',
+ desc:'화면을 꾹 누르는 세기를 알아채는 3D 터치가 들어간 모델입니다. 카메라도 12MP로 올라갔습니다.',
+ good:['12MP 카메라 + 4K 영상 촬영 시작','7년 동안 업데이트를 받은 장수 기종'],bad:['iOS 15에서 멈춤','6보다 무거워짐']},
+{id:'6sp',n:'iPhone 6s Plus',era:'vintage',se:false,home:true,y:2015,inch:5.5,g:192,mm:7.3,chip:'A9',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:14,price:99,port:'Lightning',ai:false,ios:'iOS 15까지',live:false,
+ c:2.3,z:1,p:1,t:1,tag:'크고 튼튼해진 6 Plus',
+ desc:'6 Plus의 휘어짐 문제를 더 단단한 알루미늄으로 고친 모델입니다. 배터리도 14시간으로 깁니다.',
+ good:['대화면 + 14시간 배터리','튼튼한 7000 시리즈 알루미늄'],bad:['192g','iOS 15에서 멈춤']},
+{id:'se1',n:'iPhone SE (1세대)',era:'vintage',se:true,home:true,y:2016,inch:4.0,g:113,mm:7.6,chip:'A9',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:13,price:57,port:'Lightning',ai:false,ios:'iOS 15까지',live:false,
+ c:2,z:1,p:1,t:1,tag:'역대 가장 작고 가벼움',
+ desc:'5s의 각진 몸에 6s의 속을 넣었습니다. 113g, 4인치. 아이폰 역사상 가장 작습니다.',
+ good:['아이폰 중 가장 작고 가장 가벼움','각진 디자인이 지금도 인기'],bad:['화면이 너무 작아 영상·게임은 불편','iOS 15에서 멈춤']},
+{id:'7',n:'iPhone 7',era:'vintage',se:false,home:true,y:2016,inch:4.7,g:138,mm:7.1,chip:'A10 Fusion',hz:60,lens:1,isl:'home',cam:'12MP 싱글 (손떨림 보정)',zoom:'망원 없음',batt:13,price:87,port:'Lightning',ai:false,ios:'iOS 15까지',live:false,
+ c:2.7,z:1,p:1.5,t:1,tag:'이어폰 구멍이 사라진 해',
+ desc:'3.5mm 이어폰 단자를 없애서 크게 논란이 됐던 모델입니다. 대신 방수가 처음 들어왔고, 홈버튼도 진짜로 눌리지 않는 방식으로 바뀌었습니다.',
+ good:['첫 방수 아이폰 (IP67)','제트블랙 같은 인기 색상'],bad:['이어폰 단자 없음. 젠더 필요','iOS 15에서 멈춤']},
+{id:'7p',n:'iPhone 7 Plus',era:'vintage',se:false,home:true,y:2016,inch:5.5,g:188,mm:7.3,chip:'A10 Fusion',hz:60,lens:2,isl:'home',cam:'12MP 듀얼 (광각 + 망원)',zoom:'2배 광학',batt:14,price:102,port:'Lightning',ai:false,ios:'iOS 15까지',live:false,
+ c:3.5,z:5,p:1.5,t:1,tag:'카메라가 두 개가 된 순간',
+ desc:'아이폰 최초의 듀얼 카메라입니다. 뒷배경을 흐리게 만드는 인물사진 모드가 여기서 처음 나왔습니다.',
+ good:['첫 듀얼 카메라 + 2배 광학 망원','인물사진 모드 최초 탑재'],bad:['188g','iOS 15에서 멈춤']},
+{id:'8',n:'iPhone 8',era:'vintage',se:false,home:true,y:2017,inch:4.7,g:148,mm:7.3,chip:'A11 Bionic',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:13,price:95,port:'Lightning',ai:false,ios:'iOS 16까지',live:false,
+ c:3,z:1,p:2,t:1,tag:'무선충전의 시작',
+ desc:'뒷면을 유리로 바꾸면서 무선 충전이 처음 가능해진 모델입니다. 마지막 홈버튼 일반 아이폰이기도 합니다.',
+ good:['첫 무선 충전 아이폰','홈버튼 일반형의 마지막 세대'],bad:['유리 뒷면이라 깨지기 쉬움','iOS 16에서 멈춤']},
+{id:'8p',n:'iPhone 8 Plus',era:'vintage',se:false,home:true,y:2017,inch:5.5,g:202,mm:7.5,chip:'A11 Bionic',hz:60,lens:2,isl:'home',cam:'12MP 듀얼 (광각 + 망원)',zoom:'2배 광학',batt:14,price:109,port:'Lightning',ai:false,ios:'iOS 16까지',live:false,
+ c:3.8,z:5,p:2,t:1,tag:'홈버튼 시대의 마지막 대장',
+ desc:'홈버튼이 달린 아이폰 중 가장 강력한 모델입니다. 듀얼 카메라 + 무선충전 + A11을 다 갖췄습니다.',
+ good:['홈버튼 모델 중 성능 최강','듀얼 카메라 + 무선 충전'],bad:['202g','iOS 16에서 멈춤']},
+{id:'x',n:'iPhone X',era:'vintage',se:false,home:false,y:2017,inch:5.8,g:174,mm:7.7,chip:'A11 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 망원)',zoom:'2배 광학',batt:13,price:136,port:'Lightning',ai:false,ios:'iOS 16까지',live:false,
+ c:4,z:5,p:2,t:1,tag:'홈버튼을 없앤 혁명',
+ desc:'홈버튼을 지웠습니다. 대신 얼굴을 봅니다. 지금 아이폰이 이렇게 생긴 이유, 전부 여기서 시작됐습니다.',
+ good:['Face ID · 노치 · OLED 전부 최초','지금 아이폰 디자인의 원조'],bad:['iOS 16에서 멈춤','배터리 13시간으로 짧음']},
+
+/* ===== 클래식 2018–2020 ===== */
+{id:'xr',n:'iPhone XR',era:'classic',se:false,home:false,y:2018,inch:6.1,g:194,mm:8.3,chip:'A12 Bionic',hz:60,lens:1,isl:'notch',cam:'12MP 싱글',zoom:'망원 없음',batt:16,price:99,port:'Lightning',ai:false,ios:'iOS 18까지',live:false,
+ c:3.5,z:1,p:2.5,t:1,tag:'알록달록 6가지 색',
+ desc:'X의 기능을 싸게 풀어낸 모델입니다. 빨강·노랑·파랑 같은 밝은 색이 많아서 지금도 색깔로 기억됩니다.',
+ good:['여섯 가지 색','배터리 16시간'],bad:['LCD라 화면이 덜 쨍함','iOS 18에서 멈춤']},
+{id:'xs',n:'iPhone XS',era:'classic',se:false,home:false,y:2018,inch:5.8,g:177,mm:7.7,chip:'A12 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 망원)',zoom:'2배 광학',batt:14,price:137,port:'Lightning',ai:false,ios:'iOS 18까지',live:false,
+ c:4.3,z:5,p:2.5,t:1,tag:'X를 다듬은 완성형',
+ desc:'X의 문제를 고치고 카메라 처리를 크게 올린 모델입니다. 크기는 그대로라 한 손에 잘 잡힙니다.',
+ good:['5.8인치로 한 손 조작이 가능','2배 광학 망원'],bad:['배터리 14시간','iOS 18에서 멈춤']},
+{id:'xsm',n:'iPhone XS Max',era:'classic',se:false,home:false,y:2018,inch:6.5,g:208,mm:7.7,chip:'A12 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 망원)',zoom:'2배 광학',batt:15,price:149,port:'Lightning',ai:false,ios:'iOS 18까지',live:false,
+ c:4.3,z:5,p:2.5,t:1,tag:'Max라는 이름의 시작',
+ desc:'6.5인치. 당시로선 압도적이었습니다. "Max"라는 이름도 여기서 처음 붙었습니다.',
+ good:['6.5인치 대화면 OLED','2배 광학 망원'],bad:['208g','iOS 18에서 멈춤']},
+{id:'11',n:'iPhone 11',era:'classic',se:false,home:false,y:2019,inch:6.1,g:194,mm:8.3,chip:'A13 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:17,price:99,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:4.5,z:1,p:3,t:1,tag:'가성비 전설',
+ desc:'초광각과 야간 모드가 처음 들어온 기본형. 그리고 7년째 새 iOS를 받고 있습니다.',
+ good:['아직도 최신 iOS를 받는 가장 싼 아이폰','초광각 + 야간 모드'],bad:['60Hz에 노치가 큼','194g']},
+{id:'11p',n:'iPhone 11 Pro',era:'classic',se:false,home:false,y:2019,inch:5.8,g:188,mm:8.1,chip:'A13 Bionic',hz:60,lens:3,isl:'notch',cam:'12MP ×3 (초광각·광각·망원)',zoom:'2배 광학',batt:18,price:139,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5.5,z:5,p:3,t:1,tag:'카메라 세 개의 시작',
+ desc:'렌즈 세 개가 네모 칸에 모인 지금의 Pro 디자인이 여기서 시작됐습니다. 작으면서 Pro인 마지막 세대입니다.',
+ good:['5.8인치로 작은데 렌즈 3개','아직 최신 iOS 지원'],bad:['60Hz','배터리는 Pro Max에 밀림']},
+{id:'11pm',n:'iPhone 11 Pro Max',era:'classic',se:false,home:false,y:2019,inch:6.5,g:226,mm:8.1,chip:'A13 Bionic',hz:60,lens:3,isl:'notch',cam:'12MP ×3 (초광각·광각·망원)',zoom:'2배 광학',batt:20,price:155,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5.5,z:5,p:3,t:1,tag:'배터리가 확 길어진 해',
+ desc:'배터리를 20시간까지 늘려서 "하루 종일 쓰는 아이폰"이라는 말이 나오게 한 모델입니다.',
+ good:['배터리 20시간 + 렌즈 3개','아직 최신 iOS 지원'],bad:['226g','60Hz']},
+{id:'se2',n:'iPhone SE (2세대)',era:'classic',se:true,home:true,y:2020,inch:4.7,g:148,mm:7.3,chip:'A13 Bionic',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:13,price:55,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:3,z:1,p:3,t:1,tag:'홈버튼 + 최신 iOS',
+ desc:'아이폰 8 몸에 11의 칩을 넣은 기종입니다. 홈버튼이 그리운데 최신 iOS도 쓰고 싶다면 이것뿐입니다.',
+ good:['홈버튼 + 터치 ID인데 최신 iOS 지원','가격이 매우 저렴'],bad:['배터리 13시간으로 짧음','카메라 하나, 화면 4.7인치']},
+{id:'12m',n:'iPhone 12 mini',era:'classic',se:false,home:false,y:2020,inch:5.4,g:135,mm:7.4,chip:'A14 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:15,price:95,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:4.8,z:1,p:3.5,t:1,tag:'각진 디자인 + 초소형',
+ desc:'아이폰 5 같은 각진 옆면이 돌아온 해입니다. 135g으로 가볍고, 작은 아이폰을 원하는 사람들의 최애입니다.',
+ good:['135g. 요즘 아이폰 중 최경량급','각진 디자인 + MagSafe 자석 충전'],bad:['배터리 15시간으로 짧음','화면이 작아 게임은 답답']},
+{id:'12',n:'iPhone 12',era:'classic',se:false,home:false,y:2020,inch:6.1,g:164,mm:7.4,chip:'A14 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:17,price:109,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:4.8,z:1,p:3.5,t:1,tag:'5G와 각진 몸의 시작',
+ desc:'5G와 각진 디자인, MagSafe 자석 충전이 한꺼번에 들어온 모델입니다. 중고 시세가 잘 맞습니다.',
+ good:['6.1인치인데 164g','5G + MagSafe + 최신 iOS 지원'],bad:['60Hz, 망원 렌즈 없음','배터리 17시간']},
+{id:'12p',n:'iPhone 12 Pro',era:'classic',se:false,home:false,y:2020,inch:6.1,g:189,mm:7.4,chip:'A14 Bionic',hz:60,lens:3,isl:'notch',cam:'12MP ×3 (광각·초광각·망원)',zoom:'2배 광학',batt:17,price:135,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5.8,z:5,p:3.5,t:1,tag:'스테인리스 스틸 옆면',
+ desc:'옆면이 거울처럼 반짝이는 스테인리스 스틸입니다. 어두운 곳 초점을 잡아주는 라이다 센서도 들어갔습니다.',
+ good:['렌즈 3개 + 라이다 야간 초점','최신 iOS 지원'],bad:['189g. 스테인리스라 지문이 잘 묻음','60Hz']},
+{id:'12pm',n:'iPhone 12 Pro Max',era:'classic',se:false,home:false,y:2020,inch:6.7,g:228,mm:7.4,chip:'A14 Bionic',hz:60,lens:3,isl:'notch',cam:'12MP ×3 (센서 시프트 손떨림 보정)',zoom:'2.5배 광학',batt:20,price:149,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:6.2,z:5.5,p:3.5,t:1,tag:'6.7인치의 시작',
+ desc:'6.7인치가 처음 나온 해입니다. 센서 자체가 움직이며 흔들림을 잡는 기술을 아이폰 최초로 넣었습니다.',
+ good:['6.7인치 + 배터리 20시간','센서 시프트 손떨림 보정 최초'],bad:['228g','60Hz']},
+
+/* ===== 2021–2023 ===== */
+{id:'se3',n:'iPhone SE (3세대)',era:'modern',se:true,home:true,y:2022,inch:4.7,g:144,mm:7.3,chip:'A15 Bionic',hz:60,lens:1,isl:'home',cam:'12MP 싱글',zoom:'망원 없음',batt:15,price:59,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:3.2,z:1,p:4,t:1,tag:'마지막 홈버튼 아이폰',
+ desc:'애플이 만든 마지막 홈버튼 아이폰입니다. A15 칩 덕분에 속도는 아이폰 13급입니다.',
+ good:['홈버튼 아이폰 중 가장 빠름 (A15)','가격 대비 성능이 훌륭'],bad:['화면 4.7인치에 테두리가 두꺼움','카메라 하나']},
+{id:'13m',n:'iPhone 13 mini',era:'modern',se:false,home:false,y:2021,inch:5.4,g:141,mm:7.65,chip:'A15 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:17,price:95,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5,z:1,p:4,t:2,tag:'마지막 미니',
+ desc:'애플이 만든 마지막 작은 아이폰. 141g. 주머니에 넣은 줄도 모릅니다.',
+ good:['141g','작은 손으로도 한 손 조작 가능'],bad:['5.4인치라 영상·게임은 답답','배터리 17시간']},
+{id:'13',n:'iPhone 13',era:'modern',se:false,home:false,y:2021,inch:6.1,g:174,mm:7.65,chip:'A15 Bionic',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:19,price:109,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5,z:1,p:4,t:2,tag:'중고 가성비의 정석',
+ desc:'나온 지 오래됐지만 카톡·유튜브·인강은 아직도 충분히 잘 돌아갑니다.',
+ good:['중고 가격 대비 성능이 훌륭','배터리가 12보다 길어짐'],bad:['Apple Intelligence 안 됨','60Hz, 라이트닝 단자']},
+{id:'13p',n:'iPhone 13 Pro',era:'modern',se:false,home:false,y:2021,inch:6.1,g:204,mm:7.65,chip:'A15 Bionic (5코어 GPU)',hz:120,lens:3,isl:'notch',cam:'12MP ×3 (광각·초광각·망원)',zoom:'3배 광학',batt:22,price:135,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:6.3,z:6.5,p:4.3,t:2,tag:'싸게 만나는 첫 120Hz',
+ desc:'120Hz 부드러운 화면을 처음 넣은 Pro입니다. 지금 중고로 사면 값어치를 합니다.',
+ good:['120Hz라 스크롤이 확 부드러움','3배 망원 + 접사 촬영'],bad:['204g','Apple Intelligence 안 됨']},
+{id:'13pm',n:'iPhone 13 Pro Max',era:'modern',se:false,home:false,y:2021,inch:6.7,g:240,mm:7.65,chip:'A15 Bionic (5코어 GPU)',hz:120,lens:3,isl:'notch',cam:'12MP ×3 (광각·초광각·망원)',zoom:'3배 광학',batt:28,price:149,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:6.3,z:6.5,p:4.3,t:2,tag:'아이폰 최중량 240g',
+ desc:'큰 화면, 부드러운 주사율, 긴 배터리를 한 번에 누릴 수 있습니다. 대신 240g으로 아이폰 중 가장 무겁습니다.',
+ good:['6.7인치 대화면에 120Hz','배터리 28시간'],bad:['240g. 아이폰 역대 최중량','한 손 조작은 거의 불가']},
+{id:'14',n:'iPhone 14',era:'modern',se:false,home:false,y:2022,inch:6.1,g:172,mm:7.8,chip:'A15 Bionic (5코어 GPU)',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:20,price:125,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5.3,z:1,p:4.3,t:2,tag:'13이랑 거의 쌍둥이',
+ desc:'13에서 카메라 처리와 안전 기능만 좋아진 모델입니다. 값 차이가 작으면 14가 낫습니다.',
+ good:['어두운 곳 사진이 13보다 나음','충돌 감지 안전 기능'],bad:['13과 체감 차이가 거의 없음','Apple Intelligence 안 됨']},
+{id:'14pl',n:'iPhone 14 Plus',era:'modern',se:false,home:false,y:2022,inch:6.7,g:203,mm:7.8,chip:'A15 Bionic (5코어 GPU)',hz:60,lens:2,isl:'notch',cam:'12MP 듀얼 (광각 + 초광각)',zoom:'망원 없음',batt:26,price:135,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:5.3,z:1,p:4.3,t:2,tag:'Plus라는 이름의 부활',
+ desc:'Pro가 아니면서 6.7인치 큰 화면을 주는 모델입니다. 배터리도 26시간으로 깁니다.',
+ good:['큰 화면인데 값이 착함','배터리 26시간'],bad:['60Hz','망원 렌즈 없음']},
+{id:'14p',n:'iPhone 14 Pro',era:'modern',se:false,home:false,y:2022,inch:6.1,g:206,mm:7.85,chip:'A16 Bionic',hz:120,lens:3,isl:'island',cam:'48MP 메인 + 12MP 초광각 + 12MP 망원',zoom:'3배 광학',batt:23,price:155,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:7.2,z:6.5,p:5.3,t:2,tag:'다이내믹 아일랜드의 시작',
+ desc:'검은 알약 화면과 48MP 카메라를 처음 넣은 모델입니다. 화면이 항상 켜져 있는 기능도 여기서 시작됐습니다.',
+ good:['48MP 메인 카메라 첫 탑재','상시 표시 디스플레이'],bad:['206g','Apple Intelligence 안 됨']},
+{id:'14pm',n:'iPhone 14 Pro Max',era:'modern',se:false,home:false,y:2022,inch:6.7,g:240,mm:7.85,chip:'A16 Bionic',hz:120,lens:3,isl:'island',cam:'48MP 메인 + 12MP 초광각 + 12MP 망원',zoom:'3배 광학',batt:29,price:175,port:'Lightning',ai:false,ios:'iOS 26 지원',live:true,
+ c:7.2,z:6.5,p:5.3,t:2,tag:'라이트닝 시대의 마지막 최강',
+ desc:'14 Pro를 그대로 키운 모델입니다. 배터리 29시간이 가장 큰 무기입니다.',
+ good:['배터리 29시간','48MP + 3배 망원 + 대화면'],bad:['240g. 아이폰 역대 최중량','라이트닝 단자']},
+{id:'15',n:'iPhone 15',era:'modern',se:false,home:false,y:2023,inch:6.1,g:171,mm:7.8,chip:'A16 Bionic',hz:60,lens:2,isl:'island',cam:'48MP 메인 + 12MP 초광각',zoom:'2배 크롭',batt:20,price:125,port:'USB-C',ai:false,ios:'iOS 26 지원',live:true,
+ c:6.3,z:3,p:5.3,t:2,tag:'USB-C로 바뀐 첫 기본형',
+ desc:'기본 모델도 48MP 카메라와 다이내믹 아일랜드를 받은 해입니다. 충전 단자가 USB-C로 바뀌었습니다.',
+ good:['USB-C. 아이패드와 스위치와 케이블을 함께','48MP 메인 카메라'],bad:['60Hz','Apple Intelligence 안 됨']},
+{id:'15pl',n:'iPhone 15 Plus',era:'modern',se:false,home:false,y:2023,inch:6.7,g:201,mm:7.8,chip:'A16 Bionic',hz:60,lens:2,isl:'island',cam:'48MP 메인 + 12MP 초광각',zoom:'2배 크롭',batt:26,price:135,port:'USB-C',ai:false,ios:'iOS 26 지원',live:true,
+ c:6.3,z:3,p:5.3,t:2,tag:'큰 화면 + USB-C',
+ desc:'15를 키운 모델입니다. 큰 화면과 긴 배터리를 Pro 값 없이 씁니다.',
+ good:['배터리 26시간','USB-C + 48MP'],bad:['60Hz','Apple Intelligence 안 됨']},
+{id:'15p',n:'iPhone 15 Pro',era:'modern',se:false,home:false,y:2023,inch:6.1,g:187,mm:8.25,chip:'A17 Pro',hz:120,lens:3,isl:'island',cam:'48MP 메인 + 12MP 초광각 + 12MP 망원',zoom:'3배 광학',batt:23,price:155,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:8,z:6.5,p:6.5,t:3,tag:'티타늄 + 액션 버튼',
+ desc:'티타늄으로 가벼워졌습니다. 소리 조절 스위치는 무엇이든 담는 액션 버튼이 됐습니다.',
+ good:['Pro인데 187g','Apple Intelligence 되는 최소 사양'],bad:['오래 붙잡고 있으면 발열','망원은 3배까지']},
+{id:'15pm',n:'iPhone 15 Pro Max',era:'modern',se:false,home:false,y:2023,inch:6.7,g:221,mm:8.25,chip:'A17 Pro',hz:120,lens:3,isl:'island',cam:'48MP 메인 + 12MP 초광각 + 12MP 망원',zoom:'5배 테트라프리즘',batt:29,price:190,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:8.5,z:8.5,p:6.5,t:3,tag:'5배 망원의 시작',
+ desc:'렌즈 속에서 빛을 네 번 꺾어 5배 망원을 넣은 첫 아이폰입니다. 멀리 찍기의 판도를 바꿨습니다.',
+ good:['5배 광학 망원','배터리 29시간'],bad:['221g','15 Pro보다 비쌈']},
+
+/* ===== 최신 2024–2025 ===== */
+{id:'16e',n:'iPhone 16e',era:'latest',se:false,home:false,y:2025,inch:6.1,g:167,mm:7.8,chip:'A18',hz:60,lens:1,isl:'notch',cam:'48MP 싱글 (2-in-1)',zoom:'2배 크롭',batt:26,price:99,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:5.5,z:2.5,p:7.5,t:2,tag:'가장 싼 최신 칩',
+ desc:'카메라는 하나. 칩은 최신 A18. 새것을 싸게 사고 싶다면 여기서 답이 나옵니다.',
+ good:['신제품 중 가장 저렴','A18 + Apple Intelligence + 배터리 26시간'],bad:['초광각 렌즈 없음','60Hz에 노치 디자인']},
+{id:'16',n:'iPhone 16',era:'latest',se:false,home:false,y:2024,inch:6.1,g:170,mm:7.8,chip:'A18',hz:60,lens:2,isl:'island',cam:'48MP 퓨전 + 12MP 초광각(접사)',zoom:'2배 크롭',batt:22,price:125,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:6.8,z:3,p:7.5,t:3,tag:'카메라 버튼이 생긴 기본형',
+ desc:'옆면을 꾹 누르면 카메라가 켜지는 카메라 컨트롤 버튼이 생겼습니다. 접사 촬영도 기본형 최초입니다.',
+ good:['A18 + Apple Intelligence','카메라 컨트롤 버튼, 접사 촬영'],bad:['아직 60Hz','망원 렌즈 없음']},
+{id:'16pl',n:'iPhone 16 Plus',era:'latest',se:false,home:false,y:2024,inch:6.7,g:199,mm:7.8,chip:'A18',hz:60,lens:2,isl:'island',cam:'48MP 퓨전 + 12MP 초광각(접사)',zoom:'2배 크롭',batt:27,price:135,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:6.8,z:3,p:7.5,t:3,tag:'크고 오래가는 기본형',
+ desc:'16을 키운 모델입니다. 큰 화면에 배터리 27시간, 무게는 Pro Max보다 훨씬 가볍습니다.',
+ good:['6.7인치인데 199g','배터리 27시간'],bad:['60Hz','망원 렌즈 없음']},
+{id:'16p',n:'iPhone 16 Pro',era:'latest',se:false,home:false,y:2024,inch:6.3,g:199,mm:8.25,chip:'A18 Pro',hz:120,lens:3,isl:'island',cam:'48MP 퓨전 + 48MP 초광각 + 12MP 망원',zoom:'5배 광학',batt:27,price:155,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:9,z:8.5,p:8.5,t:4,tag:'작은 Pro에 5배 망원',
+ desc:'작은 Pro에도 5배 망원. 초광각까지 48MP로 올라갔습니다.',
+ good:['작은 크기에 5배 망원 + 48MP 초광각','A18 Pro. 무거운 게임도 여유'],bad:['값이 비쌈','배터리는 Pro Max에 밀림']},
+{id:'16pm',n:'iPhone 16 Pro Max',era:'latest',se:false,home:false,y:2024,inch:6.9,g:227,mm:8.25,chip:'A18 Pro',hz:120,lens:3,isl:'island',cam:'48MP 퓨전 + 48MP 초광각 + 12MP 망원',zoom:'5배 광학',batt:33,price:190,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:9,z:8.5,p:8.5,t:4,tag:'6.9인치의 시작',
+ desc:'화면이 6.9인치로 커지고 배터리가 33시간으로 늘었습니다. 영상 보고 게임하기엔 최고입니다.',
+ good:['6.9인치 대화면 + 배터리 33시간','5배 망원 + 4K 120fps 영상'],bad:['227g','가격이 높음']},
+{id:'17',n:'iPhone 17',era:'latest',se:false,home:false,y:2025,inch:6.3,g:177,mm:7.95,chip:'A19',hz:120,lens:2,isl:'island',cam:'48MP 듀얼 퓨전 (메인 + 초광각)',zoom:'2배 크롭',batt:30,price:129,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:8,z:3,p:9,t:3,tag:'기본형인데 120Hz',
+ desc:'기본 모델에 드디어 120Hz. 초광각까지 48MP, 배터리는 30시간. 지금 가장 셈이 맞는 선택입니다.',
+ good:['기본형 최초 120Hz 화면','배터리 30시간 + 48MP 듀얼 카메라'],bad:['망원 렌즈는 여전히 없음','Pro보다 발열 관리가 약함']},
+{id:'air',n:'iPhone Air',era:'latest',se:false,home:false,y:2025,inch:6.5,g:165,mm:5.64,chip:'A19 Pro',hz:120,lens:1,isl:'island',cam:'48MP 싱글',zoom:'2배 크롭',batt:27,price:159,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:6.8,z:2.5,p:9.5,t:4,tag:'역대 가장 얇은 아이폰',
+ desc:'5.6mm. 아이폰 역사상 가장 얇습니다. 6.5인치 화면을 담고도 165g.',
+ good:['6.5인치인데 165g. 큰 화면 중 최경량','A19 Pro 칩 + 120Hz'],bad:['카메라가 하나뿐 (초광각·망원 없음)','얇은 만큼 값은 비쌈']},
+{id:'17p',n:'iPhone 17 Pro',era:'latest',se:false,home:false,y:2025,inch:6.3,g:204,mm:8.75,chip:'A19 Pro',hz:120,lens:3,isl:'island',cam:'48MP ×3 (메인·초광각·망원)',zoom:'4배 · 8배',batt:33,price:179,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:10,z:10,p:10,t:4,tag:'카메라 셋 다 48MP',
+ desc:'세 렌즈가 전부 48MP. 안에는 증기로 열을 나르는 냉각 장치. 오래 붙잡고 있어도 느려지지 않습니다.',
+ good:['48MP ×3 + 4배·8배 망원','베이퍼 챔버 냉각. 오래 해도 안 느려짐'],bad:['204g','가격대가 높음']},
+{id:'17pm',n:'iPhone 17 Pro Max',era:'latest',se:false,home:false,y:2025,inch:6.9,g:233,mm:8.75,chip:'A19 Pro',hz:120,lens:3,isl:'island',cam:'48MP ×3 (메인·초광각·망원)',zoom:'4배 · 8배',batt:39,price:199,port:'USB-C',ai:true,ios:'iOS 26 지원',live:true,
+ c:10,z:10,p:10,t:4,tag:'모든 항목 1등',
+ desc:'배터리 39시간. 아이폰 역사상 최고 기록입니다. 카메라도, 성능도, 화면도 전부 정점. 대신 233g입니다.',
+ good:['배터리 39시간. 역대 1위','48MP ×3 + 8배 망원 + 최고 성능'],bad:['233g. 주머니에서 존재감이 큼','가장 비쌈']}
+];
+
+/* ---------- 폰 일러스트 (앞면 + 뒷면) ---------- */
+/* 기종마다 카메라 배치가 다르다 — 그게 한눈에 구별되는 가장 큰 특징이라서 실제 배치대로 그렸습니다. */
+const CAM = {};
+['2g','3g','3gs','4','4s','5','5c','5s','6','6p','6s','6sp','se1','7','8','se2','se3'].forEach(i => CAM[i] = 'single');   // 렌즈 하나, 튀어나온 판 없음
+['xr','16e'].forEach(i => CAM[i] = 'sq1');                                         // 작은 사각판 + 렌즈 하나
+CAM['air'] = 'bar1';                                                               // 가로로 긴 판 (아이폰 에어)
+['7p','8p'].forEach(i => CAM[i] = 'dualH');                                        // 가로 알약 듀얼
+['x','xs','xsm'].forEach(i => CAM[i] = 'dualV');                                   // 세로 알약 듀얼
+CAM['11'] = 'sq2v';                                                                // 사각판 + 세로 듀얼
+['12m','12','13m','13','14','14pl','15','15pl'].forEach(i => CAM[i] = 'sq2d');      // 사각판 + 대각선 듀얼
+['16','16pl','17'].forEach(i => CAM[i] = 'pill2');                                 // 세로 알약 듀얼 (16부터 바뀜)
+['11p','11pm','12p','12pm','13p','13pm','14p','14pm','15p','15pm','16p','16pm']
+  .forEach(i => CAM[i] = 'sq3');                                                   // 사각판 + 삼각 트리플
+['17p','17pm'].forEach(i => CAM[i] = 'bar3');                                      // 가로로 긴 판 + 트리플
+const BANDS = ['6','6p','6s','6sp','se1','7','7p'];                                // 뒷면 안테나 줄무늬
+
+const lensArt = (x, y, r) =>
+  '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-width="1.6"/>' +
+  '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.4).toFixed(1) + '" fill="var(--ink-3)"/>';
+const dotArt = (x, y, r) =>
+  '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="var(--ink-3)" opacity=".45"/>';
+const plateArt = (x, y, w, hh, rr) =>
+  '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" rx="' + rr +
+  '" fill="var(--line-2)" stroke="var(--line)" stroke-width="1.2"/>';
+
+function camArt(m){
+  const t = m.brand === 'galaxy' ? 'gx' + Math.min(m.lens, 4) : (CAM[m.id] || 'sq3');
+  switch (t){
+    case 'single': return lensArt(20,19,6.2) + dotArt(34,19,2.6);
+    case 'sq1':    return plateArt(8,8,25,25,7) + lensArt(20.5,20.5,6);
+    case 'bar1':   return plateArt(6,8,88,22,11) + lensArt(20,19,6.4) + dotArt(34,19,2.6);
+    case 'dualH':  return plateArt(8,10,37,18,9) + lensArt(17,19,5.4) + lensArt(36,19,5.4) + dotArt(53,19,2.6);
+    case 'dualV':  return plateArt(10,8,18,37,9) + lensArt(19,17,5.4) + lensArt(19,36,5.4) + dotArt(36,26,2.6);
+    case 'sq2v':   return plateArt(8,8,35,35,9) + lensArt(19.5,19.5,6) + lensArt(19.5,33.5,6) + dotArt(34,26,2.8);
+    case 'sq2d':   return plateArt(8,8,35,35,9) + lensArt(19.5,19.5,6) + lensArt(33.5,33.5,6) + dotArt(34,17,2.8);
+    case 'pill2':  return plateArt(10,8,18,39,9) + lensArt(19,17,5.6) + lensArt(19,38,5.6) + dotArt(36,14,2.6);
+    case 'sq3':    return plateArt(8,8,37,37,10) + lensArt(19,18,5.6) + lensArt(19,35,5.6) + lensArt(35,26.5,5.6) + dotArt(36,12,2.4);
+    case 'bar3':   return plateArt(6,8,88,33,13) + lensArt(19,17,5.6) + lensArt(19,32,5.6) + lensArt(34,24.5,5.6) + dotArt(75,17,3) + dotArt(75,32,2.4);
+    case 'gx2':    return lensArt(19,16,5.4) + lensArt(19,30,5.4) + dotArt(19,42,2.4);
+    case 'gx3':    return lensArt(19,15,5.4) + lensArt(19,28,5.4) + lensArt(19,41,5.4) + dotArt(31,15,2.4);
+    case 'gx4':    return lensArt(19,13,5) + lensArt(19,25,5) + lensArt(19,37,5) + lensArt(31,45,4.4) + dotArt(31,13,2.2);
+    default:       return lensArt(20,19,6);
+  }
+}
+
+function frontArt(m, H){
+  const rx = m.brand === 'galaxy' ? 9 : m.home ? 13 : 15;
+  let s = '';
+  if (m.home){
+    /* 홈버튼 시대 — 위아래 테두리가 두껍고, 수화구 + 홈버튼이 있다 */
+    s += '<rect x="7" y="26" width="86" height="' + (H - 52) + '" rx="1.5" fill="var(--surface-2)"/>';
+    s += '<rect x="39" y="14" width="22" height="3.4" rx="1.7" fill="var(--ink-3)" opacity=".55"/>';
+    s += dotArt(31, 15.7, 2.1);
+    s += '<circle cx="50" cy="' + (H - 15) + '" r="9" fill="none" stroke="var(--ink-3)" stroke-width="1.8"/>';
+  } else {
+    s += '<rect x="5.5" y="5.5" width="89" height="' + (H - 11) + '" rx="' + (rx - 3.5) + '" fill="var(--surface-2)"/>';
+    if (m.brand === 'galaxy')          s += '<circle cx="50" cy="12.5" r="2.7" fill="var(--ink-2)"/>';
+    else if (m.isl === 'island')       s += '<rect x="36" y="10" width="28" height="8.5" rx="4.25" fill="var(--ink-2)"/>';
+    else                               s += '<path d="M29,5.5 h42 v4.6 a4.6,4.6 0 0 1 -4.6,4.6 h-32.8 a4.6,4.6 0 0 1 -4.6,-4.6 z" fill="var(--ink-2)"/>';
+    /* 유리에 비친 빛 */
+    s += '<path d="M13,' + (H - 24) + ' L46,17 L61,17 L28,' + (H - 24) + ' Z" fill="var(--ink)" opacity=".035"/>';
+  }
+  return s;
+}
+
+function sideButtons(H){
+  const b = (bx, by, bh) => '<rect x="' + bx + '" y="' + by + '" width="3" height="' + bh +
+    '" rx="1.5" fill="var(--ink-3)" opacity=".5"/>';
+  return b(-1.2, Math.round(H * .17), Math.round(H * .045)) +
+         b(-1.2, Math.round(H * .25), Math.round(H * .075)) +
+         b(-1.2, Math.round(H * .35), Math.round(H * .075)) +
+         b(98.2, Math.round(H * .26), Math.round(H * .11));
+}
+
+function phoneEl(m, px){
+  const r  = m.r || (m.home ? 0.52 : 0.462);
+  const H  = Math.round(100 / r);
+  const sc = (m.r && m.r > 0.6) ? px * 0.7 : px;       // 폴더블은 펼치면 너무 커져서 줄인다
+  const hh = Math.round(m.inch * sc);
+  const vbW = 224, vbH = H + 4;
+  const w  = Math.round(hh * vbW / vbH);
+  const rx = m.brand === 'galaxy' ? 9 : m.home ? 13 : 15;
+  const shell = '<rect x="1.5" y="1.5" width="97" height="' + (H - 3) + '" rx="' + rx +
+                '" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="2"/>';
+  let back = shell + camArt(m);
+  if (BANDS.includes(m.id))
+    back += '<path d="M2,' + Math.round(H * .30) + ' h96 M2,' + Math.round(H * .88) +
+            ' h96" stroke="var(--line)" stroke-width="1.6" fill="none"/>';
+
+  const d = document.createElement('div');
+  d.className = 'phone';
+  d.innerHTML =
+    '<svg width="' + w + '" height="' + hh + '" viewBox="-3 -2 ' + vbW + ' ' + vbH + '" ' +
+      'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + m.n + ' 앞면과 뒷면">' +
+      '<g>' + shell + frontArt(m, H) + sideButtons(H) + '</g>' +
+      '<g transform="translate(118,0)">' + back + sideButtons(H) + '</g>' +
+    '</svg>';
+  return d;
+}
+
+/* ---------- 퀴즈 ---------- */
+const Q = [
+ {k:'era', q:'어떤 시대의 아이폰이 좋은가요?', hint:'빈티지는 값이 내려갑니다. 대신 새 앱이 설치되지 않을 수 있습니다.',
+  o:[{t:'최신으로', d:'새 앱도 새 기능도 전부', v:2},
+     {t:'가성비 좋은 구형으로', d:'2019~2023년, 업데이트는 아직 지원', v:1},
+     {t:'빈티지 감성으로', d:'홈버튼, 작은 화면, 옛날 그 디자인', v:0}]},
+ {k:'budget', q:'가격은 어떤 쪽이 좋은가요?', hint:'금액이 아니라, 고르는 기준입니다.',
+  o:[{t:'상태 상관없이 가장 싼 걸로', d:'흠집도 연식도 신경 쓰지 않습니다', v:1},
+     {t:'가성비 중심으로', d:'낸 돈에 비해 성능이 좋은 쪽으로', v:2},
+     {t:'보급형으로', d:'Pro 말고, 부담 없는 기본 라인으로', v:3},
+     {t:'가격은 적당하되 성능은 괜찮은 걸로', d:'중간 가격대에서 성능은 넉넉하게', v:4},
+     {t:'최대 스펙으로', d:'성능도 카메라도 전부 최고로', v:5}]},
+ {k:'size', q:'화면 크기는 어느 정도가 좋은가요?', hint:'클수록 시원합니다. 그만큼 무거워지고, 한 손으로는 어려워집니다.',
+  o:[{t:'작고 가볍게', d:'주머니에 쏙. 한 손으로 전부', v:2.5},
+     {t:'적당하게', d:'6.1~6.3인치 정도', v:7},
+     {t:'크고 시원하게', d:'6.7~6.9인치. 영상 보기 좋은 크기', v:9.6}]},
+ {k:'wb', q:'무게와 배터리, 어느 쪽이 더 중요한가요?', hint:'배터리가 크면 그만큼 무거워집니다. 둘은 맞바꾸는 관계입니다.',
+  o:[{t:'가벼운 쪽으로', d:'주머니에 넣은 줄 모를 만큼', v:0},
+     {t:'반반입니다', d:'적당히 가볍고 적당히 오래가게', v:1},
+     {t:'오래가는 쪽으로', d:'무거워도 하루 종일 버티게', v:2}]},
+ {k:'cam', q:'사진과 영상은 얼마나 중요한가요?', hint:'가장 자주 쓰는 기능. 값 차이도 여기서 가장 크게 납니다.',
+  o:[{t:'찍히기만 하면 충분합니다', d:'인증샷, 칠판 사진 정도', v:0},
+     {t:'예쁘게 나왔으면 합니다', d:'친구들과 찍은 사진이 잘 나오도록', v:1},
+     {t:'멀리 있는 것도 당겨 찍고 싶습니다', d:'공연, 운동회, 그리고 풍경', v:2},
+     {t:'영상까지 제대로 찍고 싶습니다', d:'브이로그, 유튜브 촬영', v:3}]},
+ {k:'perf', q:'게임은 얼마나 하시나요?', hint:'무거운 게임일수록 칩과 발열이 갈립니다.',
+  o:[{t:'거의 하지 않습니다', d:'유튜브와 카톡, 인강 위주', v:0},
+     {t:'가볍게 하는 편입니다', d:'브롤스타즈, 쿠키런 정도', v:1},
+     {t:'고사양 게임을 많이 합니다', d:'원신, 배그처럼 무거운 게임', v:2}]}
+];
+
+/* 1번 질문(시대)에 따라 뒤따르는 질문을 통째로 갈아 끼웁니다.
+   '빈티지'를 골랐는데 '최신형으로' 같은 보기가 나오면 말이 되지 않기 때문입니다. */
+const VARIANTS = {
+  /* ── 0 · 빈티지 감성으로 ── */
+  0:{
+    budget:{k:'budget', q:'빈티지 아이폰, 어떤 기준으로 고를까요?',
+      hint:'옛날 기종은 대부분 중고입니다. 금액이 아니라 기준을 정하세요.',
+      o:[{t:'상태 상관없이 가장 싼 걸로', d:'작동만 하면 충분합니다', v:1},
+         {t:'그 시절 보급형으로', d:'그 세대의 기본 모델로', v:8},
+         {t:'그 시절 최고급 모델로', d:'당시 플래그십이었던 Pro · Plus · X 계열로', v:7},
+         {t:'가장 상징적인 모델로', d:'아이폰 역사에 이름을 남긴 기종으로', v:6}]},
+    size:{k:'size', q:'그 시절 화면, 어느 정도가 좋은가요?',
+      hint:'2014~2017년의 아이폰은 4인치에서 5.8인치. 지금 기준으로는 전부 작습니다.',
+      o:[{t:'4인치대, 한 손에 쏙', d:'SE 1세대, 6, 6s, 7, 8', v:2.0},
+         {t:'5.5인치 Plus, 그 시절의 대화면', d:'6 Plus, 7 Plus, 8 Plus', v:5.2},
+         {t:'5.8인치, 그때 가장 컸던 화면', d:'아이폰 X', v:6.2}]},
+    wb:{k:'wb', q:'무게와 배터리, 어느 쪽이 더 중요한가요?',
+      hint:'그 시절에도 Plus는 무거운 대신 오래갔습니다.',
+      o:[{t:'가벼운 쪽으로', d:'SE 1세대는 113g밖에 안 나갑니다', v:0},
+         {t:'반반입니다', d:'적당히 가볍고 적당히 오래가게', v:1},
+         {t:'오래가는 쪽으로', d:'Plus 계열이 배터리가 깁니다', v:2}]},
+    cam:{k:'cam', q:'그 시절 카메라, 어느 정도면 될까요?',
+      hint:'2016년 7 Plus. 렌즈가 두 개가 되고, 인물사진 모드가 생겼습니다.',
+      o:[{t:'찍히기만 하면 충분합니다', d:'수집용이라 카메라는 덜 중요합니다', v:0},
+         {t:'그 시절치고 잘 나왔으면 합니다', d:'12MP 이상으로', v:1},
+         {t:'망원 렌즈가 있으면 좋겠습니다', d:'2배 광학. 7 Plus 이후 상위 모델', v:2}]},
+    perf:{k:'perf', q:'이 아이폰으로 무엇을 하실 생각인가요?',
+      hint:'업데이트가 끝난 기종이 대부분. 요즘 앱은 설치되지 않습니다.',
+      o:[{t:'보기만 해도 좋습니다', d:'수집하거나 전시해 둘 생각입니다', v:0},
+         {t:'가끔 실제로 쓸 생각입니다', d:'음악, 사진, 시계용 서브폰으로', v:1}]},
+    /* 빈티지에만 붙는 마지막 질문. 어느 시절로 갈지 여기서 갈립니다 */
+    use:{k:'use', q:'빈티지 중에서도, 어느 시절인가요?',
+      hint:'같은 빈티지라도 2007년과 2017년은 완전히 다른 물건입니다.',
+      o:[{t:'가장 처음 — 전시·수집용', d:'1세대, 3G, 3GS · 2007~2009년', v:0},
+         {t:'4~5s 시절 — 사진·인스타용', d:'4, 4S, 5, 5c, 5s · 2010~2013년', v:1},
+         {t:'6 이후 — 실사용도 됩니다', d:'6부터 XS Max까지 · 2014~2018년', v:2}]}
+  },
+  /* ── 1 · 가성비 좋은 구형으로 ── */
+  1:{
+    budget:{k:'budget', q:'구형 중에서 어떤 쪽이 좋은가요?',
+      hint:'구형으로 정하셨으니, 그 안에서의 기준만.',
+      o:[{t:'가장 싸게, 상태는 상관없이', d:'값이 제일 낮은 쪽으로', v:1},
+         {t:'가성비가 제일 좋은 걸로', d:'낸 돈에 비해 성능이 좋은 쪽으로', v:2},
+         {t:'그 세대 보급형으로', d:'Pro 말고 기본 라인으로', v:3},
+         {t:'값은 좀 써도 그 세대 Pro로', d:'망원과 120Hz가 있는 상위 모델로', v:4}]},
+    size:{k:'size', q:'화면 크기는 어느 정도가 좋은가요?',
+      hint:'구형에는 지금 없는 크기도 있습니다. 미니, 5.4인치.',
+      o:[{t:'작고 가볍게', d:'12 mini, 13 mini 같은 소형', v:2.5},
+         {t:'적당하게', d:'6.1인치. 구형에서 가장 흔한 크기', v:7},
+         {t:'크고 시원하게', d:'6.7인치 Plus · Max 계열', v:9.6}]},
+    cam:{k:'cam', q:'사진과 영상은 얼마나 중요한가요?',
+      hint:'구형 기본형에 망원은 없습니다. 망원은 Pro의 것입니다.',
+      o:[{t:'찍히기만 하면 충분합니다', d:'인증샷, 칠판 사진 정도', v:0},
+         {t:'예쁘게 나왔으면 합니다', d:'야간 모드가 되는 11 이상으로', v:1},
+         {t:'망원으로 당겨 찍고 싶습니다', d:'구형 Pro 계열에만 있습니다', v:2},
+         {t:'영상까지 제대로 찍고 싶습니다', d:'브이로그, 유튜브 촬영', v:3}]},
+    perf:{k:'perf', q:'게임은 얼마나 하시나요?',
+      hint:'칩이 오래된 만큼, 무거운 게임일수록 세대가 갈립니다.',
+      o:[{t:'거의 하지 않습니다', d:'유튜브와 카톡, 인강 위주', v:0},
+         {t:'가볍게 하는 편입니다', d:'브롤스타즈, 쿠키런 정도', v:1},
+         {t:'고사양 게임을 많이 합니다', d:'구형이라면 A14 이상은 필요합니다', v:2}]}
+  }
+};
+
+/* 그 기종이 '처음' 해낸 일 — 상징성 점수와 이유 */
+const ICON = {
+  '5s': [9, '터치 ID 지문 인식과 64비트 칩을 처음 넣은 기종입니다'],
+  '5':  [8, '라이트닝 단자와 4인치 화면이 시작된 기종입니다'],
+  '5c': [6, '알록달록한 플라스틱으로 나온 유일한 아이폰입니다'],
+  '2g': [12,'세상에 처음 나온 아이폰입니다. 모든 스마트폰이 여기서 시작됐습니다'],
+  '4':  [10,'레티나 디스플레이와 전면 카메라, 애플 자체 칩을 처음 넣은 기종입니다'],
+  '4s': [9, '음성 비서 시리가 처음 들어간 기종입니다'],
+  '3g': [8, '앱스토어와 함께 나온 기종입니다'],
+  '3gs':[7, '한국에 정식 출시된 첫 아이폰입니다'],
+  x:    [10,'Face ID와 노치, OLED를 한꺼번에 처음 넣은 기종입니다'],
+  '7p': [9, '아이폰 최초의 듀얼 카메라와 인물사진 모드를 넣은 기종입니다'],
+  se1:  [9, '아이폰 역사상 가장 작고 가벼운 기종입니다'],
+  '6':  [8, '아이폰이 처음으로 커진 기종입니다'],
+  '12m':[8, '각진 디자인이 돌아온 초소형 기종입니다'],
+  '13m':[8, '애플이 만든 마지막 미니입니다'],
+  '7':  [7, '첫 방수 아이폰이자, 이어폰 단자가 사라진 기종입니다'],
+  '8':  [7, '무선 충전을 처음 넣은 기종입니다'],
+  '8p': [7, '홈버튼 아이폰 중 가장 강력했던 마지막 모델입니다'],
+  '6p': [7, '애플의 첫 5.5인치 대화면입니다'],
+  se3:  [7, '애플이 만든 마지막 홈버튼 아이폰입니다'],
+  '11': [7, '초광각과 야간 모드를 처음 넣은 기종입니다'],
+  '11p':[7, '렌즈 세 개의 Pro 디자인이 시작된 기종입니다'],
+  '14p':[7, '다이내믹 아일랜드가 처음 등장한 기종입니다'],
+  air:  [7, '두께 5.6mm, 역대 가장 얇은 아이폰입니다'],
+  '6s': [6, '3D 터치와 12MP 카메라가 들어간 기종입니다'],
+  xr:   [6, '아이폰에 컬러 시대를 연 기종입니다'],
+  xsm:  [6, 'Max라는 이름이 처음 붙은 기종입니다'],
+  '12': [6, '5G와 MagSafe 자석 충전이 시작된 기종입니다'],
+  '13p':[6, '120Hz ProMotion을 처음 넣은 기종입니다'],
+  '15': [6, '라이트닝을 버리고 USB-C로 바꾼 기종입니다'],
+  '15pm':[6,'5배 테트라프리즘 망원을 처음 넣은 기종입니다'],
+  se2:  [5, '홈버튼과 최신 iOS를 함께 쓸 수 있는 기종입니다'],
+  '12pm':[5,'센서 시프트 손떨림 보정을 처음 넣은 기종입니다'],
+  '6sp':[5, '6 Plus의 휘어짐 문제를 바로잡은 기종입니다'],
+  xs:   [5, 'X를 다듬어 완성한 기종입니다'],
+  '16': [5, '카메라 컨트롤 버튼이 생긴 기종입니다'],
+  '17': [5, '기본 모델에 처음 120Hz가 들어간 기종입니다'],
+  '17p':[5, '세 렌즈가 모두 48MP가 된 기종입니다']
+};
+const iconOf = m => ICON[m.id] || [2, ''];
+
+/* 빈티지를 고르면 질문이 하나 늘어납니다 (7개), 나머지는 6개 */
+const FLOW = () => A.era === 0 ? Q.concat([VARIANTS[0].use]) : Q;
+
+const A = {};
+let step = 0;
+const $ = id => document.getElementById(id);
+
+function renderPips(){
+  $('pips').innerHTML = FLOW().map((_, i) =>
+    '<span class="pip ' + (i < step ? 'done' : i === step ? 'now' : '') + '"></span>').join('');
+}
+
+function renderQ(){
+  /* 고른 시대에 맞는 변형이 있으면 그것을, 없으면 기본 질문을 씁니다 */
+  const list = FLOW();
+  const base = list[step];
+  const q = (VARIANTS[A.era] && VARIANTS[A.era][base.k]) || base;
+  $('qcount').textContent = '질문 ' + (step + 1) + ' / ' + list.length;
+  $('qtext').textContent = q.q;
+  $('qhint').textContent = q.hint;
+  renderPips();
+  const box = $('opts');
+  box.innerHTML = '';
+  q.o.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.type = 'button';
+    b.innerHTML = '<span class="k">' + (i + 1) + '</span><span class="t">' + o.t +
+                  '<span class="d">' + o.d + '</span></span>';
+    b.onclick = () => { A[q.k] = o.v; A[q.k + 'L'] = o.t; step++; step < FLOW().length ? renderQ() : finish(); };
+    box.appendChild(b);
+  });
+  $('backBtn').hidden = step === 0;
+  $('resetBtn').hidden = step === 0;
+  $('qintro').hidden = true;
+  $('qstage').hidden = false;
+  $('result').classList.remove('on');
+}
+
+$('backBtn').onclick = () => { if (step > 0){ step--; renderQ(); } };
+$('resetBtn').onclick = () => { step = 0; renderQ(); };
+function startQuiz(){ step = 0; renderQ(); }
+function showIntro(){
+  $('qintro').hidden = false;
+  $('qstage').hidden = true;
+  $('result').classList.remove('on');
+  $('qcount').textContent = '맞춤 추천';
+  $('pips').innerHTML = Q.map(() => '<span class="pip"></span>').join('');
+}
+$('startBtn').onclick = startQuiz;
+$('heroStart').onclick = () => { go('quiz'); startQuiz(); };
+$('again').onclick = () => { startQuiz(); window.scrollTo(0, 0); };
+
+/* 구매 기준 — 금액 대신 '어떻게 고르고 싶은가'로 점수를 냅니다.
+   오래된 기종일수록 중고로 크게 싸지므로, 연식만큼 값을 깎은 '체감 가격'을 씁니다. */
+const eff   = m => m.price * (1 - Math.min(0.6, (2025 - m.y) * 0.12));
+const isPro = m => /Pro|Max/.test(m.n);
+/* 그 세대의 최상위 모델인가 — X·XS 계열은 이름에 Pro가 없어도 당시 플래그십이었습니다 */
+const isTop = m => /Pro|Max|Plus/.test(m.n) || ['x','xs','xsm'].includes(m.id);
+/* 빈티지(~2017) / 클래식(~2020) / 그 이후에 각각 다른 가감점 */
+const oldGate = (m, vintage, classic, recent) => m.y <= 2017 ? vintage : m.y <= 2020 ? classic : recent;
+
+function budgetFit(m){
+  switch (A.budget){
+    case 1:  // 상태 상관없이 가장 싼 걸로 — 연식·상태를 안 따지고 값만 본다
+      return (4 - m.t) * 7 + (2025 - m.y) * 0.9 - eff(m) * 0.26;
+    case 2:  // 가성비 중심으로 — 낸 돈 대비 카메라·성능
+      return (m.c + m.p) * 0.9 - eff(m) * 0.20 + (m.live ? 8 : -25);
+    case 3:  // 보급형으로 — Pro가 아닌 기본 라인
+      return (2 - Math.abs(m.t - 2)) * 6 + (isPro(m) ? -18 : 9) + (m.live ? 5 : -22);
+    case 4:  // 적당한 가격 + 괜찮은 성능
+      return (2 - Math.abs(m.t - 3)) * 10 + m.p * 1.8 + (m.live ? 4 : -28);
+    /* 6·7·8번은 빈티지를 고른 분에게만 나옵니다.
+       '그 시절'이라는 말이 붙으므로, 연식이 오래될수록 가점을 줍니다. */
+    case 6:  // [빈티지] 가장 상징적인 모델로
+      return iconOf(m)[0] * 5 + (2025 - m.y) * 0.4 - eff(m) * 0.08 + oldGate(m, 10, 0, -18);
+    case 7:  // [빈티지] 그 시절 최고급 모델로 — 그 세대의 최상위 라인
+      return (isTop(m) ? 20 : -7) + m.price * 0.11 + (m.c + m.z) * 0.9 + oldGate(m, 10, -7, -50);
+    case 8:  // [빈티지] 그 시절 보급형으로
+      return (isTop(m) ? -14 : 10) + (4 - m.t) * 4 - eff(m) * 0.09 + oldGate(m, 10, -4, -42);
+    default: // 최대 스펙으로 — 연식보다 성능·망원·등급을 봅니다
+      return m.t * 4.5 + m.p * 2.8 + m.z * 0.8 + (m.y - 2014) * 0.6 + (m.live ? 0 : -45);
+  }
+}
+
+const BUDGET_REASON = {
+  1:'상태를 따지지 않고 가장 싸게. 그 조건에 맞습니다',
+  2:'낸 돈에 비해 성능이 가장 좋습니다',
+  3:'Pro가 아닌, 부담 없는 기본 라인입니다',
+  4:'가격은 중간, 성능은 넉넉합니다',
+  5:'스펙을 가장 높게 잡았을 때 남는 기종입니다',
+  6:'아이폰 역사에 이름을 남긴 상징적인 기종입니다',
+  7:'그 시절 가장 비쌌던 최상위 모델. 당시의 정점입니다',
+  8:'그 세대의 기본 라인. 지금 구하기도 수월합니다'
+};
+
+const CAMW  = [0.4, 1.5, 1.0, 1.7];
+const ZOOMW = [0.1, 0.3, 1.8, 0.6];
+const PERFW = [0.3, 1.0, 2.0];
+const LIGHTW = [2.1, 0.8, 0.2];   // 가볍게 / 반반 / 오래가게
+const BATTW  = [0.3, 1.0, 2.3];
+
+function score(m){
+  let s = budgetFit(m);
+  /* 시대 취향 */
+  if (A.era === 2){
+    /* '최신으로'는 취향이 아니라 조건입니다. 예산 항목에 묻히지 않도록 세게 겁니다 */
+    if (!m.live) s -= 60;
+    s -= Math.max(0, 2024 - m.y) * 22;
+  }
+  else if (A.era === 1){
+    /* '구형으로'를 고르셨으므로 최신 세대는 오히려 감점합니다.
+       업데이트는 살아 있어야 하니 2019~2023년이 중심이 됩니다. */
+    if (!m.live) s -= 40;
+    s -= Math.max(0, m.y - 2023) * 14;
+    s -= Math.max(0, 2019 - m.y) * 3;
+  }
+  else {
+    /* 빈티지 — 마지막 질문에서 고른 시절 대역 안쪽이냐가 가장 크게 작용합니다.
+       이걸 넣기 전에는 2007~2013년 기종이 아예 뽑히지 않았습니다. */
+    const band = [[2007, 2009], [2010, 2013], [2014, 2018]][A.use] || [2007, 2018];
+    /* 고른 시절 밖은 사실상 제외합니다. 화면 크기 같은 앞선 답이 이걸 뒤집으면
+       "전시·수집용"을 골랐는데 2017년 기종이 나오는 일이 생깁니다. */
+    if (m.y < band[0] || m.y > band[1]) return s - 150;
+    s += 20;
+    if (m.home) s += 5;
+    s -= (m.y - 2007) * 0.4;
+  }
+  /* 크기 · 카메라 · 망원 · 성능 · 배터리 */
+  s += 12 - Math.abs(sz(m) - A.size) * 3.6;
+  s += m.c * CAMW[A.cam];
+  s += m.z * ZOOMW[A.cam];
+  s += m.p * PERFW[A.perf];
+  s += lt(m) * LIGHTW[A.wb] + bt(m) * BATTW[A.wb];
+  return s;
+}
+
+function reasons(m){
+  const r = [];
+  r.push(BUDGET_REASON[A.budget] + ' (출시가 ' + m.price + '만원 · ' + m.y + '년)');
+  if (A.budget === 6 && iconOf(m)[1]) r.push(iconOf(m)[1]);
+  if (Math.abs(sz(m) - A.size) <= 2) r.push(m.inch + '인치 · ' + m.g + 'g. 원하신 화면 크기 그대로입니다');
+  if (A.era === 0){
+    const UL = ['전시·수집하기 좋은 가장 초기 기종입니다',
+                '사진 찍기 좋은 4~5s 시절 기종입니다',
+                '지금도 서브폰으로 쓸 만한 시절의 기종입니다'];
+    if (UL[A.use]) r.push(UL[A.use] + ' (' + m.y + '년)');
+    if (m.home) r.push('동그란 홈버튼. 빈티지 감성 그대로입니다');
+  }
+  if (A.era === 2) r.push(m.ios + '. 새 앱도 그대로 설치됩니다');
+  if (A.cam >= 1) r.push('카메라 ' + m.cam);
+  if (A.cam === 2) r.push('망원 ' + m.zoom);
+  if (A.perf === 2) r.push(m.chip + ' + ' + m.hz + 'Hz. 무거운 게임도 버팁니다');
+  else if (A.perf === 1) r.push(m.chip + '. 웬만한 게임은 거뜬합니다');
+  if (A.wb === 0) r.push(m.g + 'g. 가벼운 쪽을 원하셔서 골랐습니다');
+  else if (A.wb === 2) r.push('영상 재생 ' + m.batt + '시간. 오래가는 쪽입니다');
+  else r.push(m.g + 'g · 영상 재생 ' + m.batt + '시간');
+  m.good.forEach(g => { if (r.length < 7) r.push(g); });
+  return r.slice(0, 5);
+}
+
+function finish(){
+  const ranked = M.map(m => ({ m, v: score(m) })).sort((a, b) => b.v - a.v);
+  const top = ranked[0], max = top.v, min = ranked[ranked.length - 1].v;
+  const pct = v => Math.max(6, Math.round((v - min) / (max - min) * 100));
+
+  $('qstage').hidden = true;
+  $('qintro').hidden = true;
+  $('pips').innerHTML = FLOW().map(() => '<span class="pip done"></span>').join('');
+  $('qcount').textContent = '결과';
+
+  $('winPhone').innerHTML = '';
+  $('winPhone').appendChild(phoneEl(top.m, 19));
+  $('winName').textContent = top.m.n;
+  $('winWhy').textContent = top.m.desc;
+  $('winReasons').innerHTML = reasons(top.m).map(x => '<li>' + x + '</li>').join('');
+
+  $('runners').innerHTML = ranked.slice(1, 4).map(r =>
+    '<div class="runner"><span class="rn">' + r.m.n + '</span>' +
+    '<span class="bar"><i style="width:' + pct(r.v) + '%"></i></span>' +
+    '<span class="rd">' + r.m.tag + ' · ' + r.m.inch + '인치 · ' + r.m.g + 'g · ' + r.m.y + '년 · 출시가 ' + r.m.price + '만원</span></div>').join('');
+
+  $('oldWarn').innerHTML = top.m.live ? '' :
+    '<p class="caveat warn"><strong>알아둘 것</strong> — ' + top.m.n + '은(는) ' + top.m.ios +
+    ' 에서 멈춘 기종입니다. 요즘 앱은 설치되지 않고, 은행과 학교 앱도 막힙니다. 메인 폰이 아니라 <strong>음악과 카메라, 시계</strong>를 맡기는 자리에 어울립니다.</p>';
+
+  $('result').classList.add('on');
+  document.querySelectorAll('.card').forEach(c => c.classList.toggle('pick', c.dataset.id === top.m.id));
+}
+
+/* ---------- 도감 ---------- */
+const FILTERS = [
+  ['all',     '전체 51종',        () => true],
+  ['origin',  '오리지널 2007–13', m => m.era === 'origin'],
+  ['vintage', '빈티지 2014–17',   m => m.era === 'vintage'],
+  ['classic', '클래식 2018–20',   m => m.era === 'classic'],
+  ['modern',  '2021–23',          m => m.era === 'modern'],
+  ['latest',  '최신 2024–25',     m => m.era === 'latest'],
+  ['home',    '홈버튼 시대',      m => m.home],
+  ['se',      'SE 라인',          m => m.se],
+  ['live',    '아직 업데이트 중', m => m.live]
+];
+let filter = 'all';
+
+function renderChips(){
+  $('chips').innerHTML = '';
+  FILTERS.forEach(([v, label]) => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.textContent = label;
+    b.setAttribute('aria-pressed', filter === v);
+    b.onclick = () => { filter = v; renderChips(); renderGrid(); };
+    $('chips').appendChild(b);
+  });
+}
+
+function renderGrid(){
+  const fn = FILTERS.find(f => f[0] === filter)[2];
+  const list = M.filter(fn);
+  $('count').textContent = list.length + '개 기종 · ' + list[0].y + '–' + list[list.length - 1].y;
+  const g = $('grid');
+  g.innerHTML = '';
+  list.forEach(m => {
+    const c = document.createElement('div');
+    c.className = 'card'; c.dataset.id = m.id;
+
+    const top = document.createElement('div'); top.className = 'top';
+    top.appendChild(phoneEl(m, 10.5));
+    const meta = document.createElement('div');
+    meta.innerHTML = '<div class="name">' + m.n + '</div><div class="tagline">' + m.tag + '</div>';
+    top.appendChild(meta);
+    c.appendChild(top);
+
+    const badges = document.createElement('div'); badges.className = 'badges';
+    badges.innerHTML =
+      '<span class="badge">' + m.y + '</span>' +
+      '<span class="badge' + (m.hz === 120 ? ' hz' : '') + '">' + m.hz + 'Hz</span>' +
+      '<span class="badge">렌즈 ' + m.lens + '</span>' +
+      (m.home ? '<span class="badge">홈버튼</span>' : '') +
+      (m.ai ? '<span class="badge ai">Apple Intelligence</span>' : '') +
+      (m.live ? '' : '<span class="badge old">업데이트 종료</span>');
+    c.appendChild(badges);
+
+    const d = document.createElement('p'); d.className = 'desc'; d.textContent = m.desc;
+    c.appendChild(d);
+
+    const dl = document.createElement('dl'); dl.className = 'spec';
+    [['화면', m.inch + '″'], ['무게', m.g + 'g'], ['두께', m.mm + 'mm'], ['칩', m.chip], ['카메라', m.cam],
+     ['망원', m.zoom], ['배터리', m.batt + '시간'], ['단자', m.port],
+     ['iOS', m.ios], ['출시가', priceTxt(m)]].forEach(([k, v]) => {
+      dl.innerHTML += '<dt>' + k + '</dt><dd>' + v + '</dd>';
+    });
+    c.appendChild(dl);
+
+    const pn = document.createElement('div'); pn.className = 'spec';
+    pn.innerHTML = '<dt>아쉬운 점</dt><dd class="kr">' + m.bad.join(' · ') + '</dd>';
+    c.appendChild(pn);
+
+    const more = document.createElement('div');
+    more.className = 'more'; more.textContent = '자세히 보기 →';
+    c.appendChild(more);
+
+    c.setAttribute('role', 'button');
+    c.tabIndex = 0;
+    c.setAttribute('aria-label', m.n + ' 자세히 보기');
+    c.onclick = () => openModal(m);
+    c.onkeydown = e => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(m); }
+    };
+    g.appendChild(c);
+  });
+}
+
+/* ---------- 상세 창 ---------- */
+let curM = null, lastFocus = null;
+
+function badgeHTML(m){
+  return '<span class="badge">' + m.y + '</span>' +
+    '<span class="badge' + (m.hz === 120 ? ' hz' : '') + '">' + m.hz + 'Hz</span>' +
+    '<span class="badge">렌즈 ' + m.lens + '</span>' +
+    (m.home ? '<span class="badge">홈버튼</span>' : '') +
+    (m.ai ? '<span class="badge ai">Apple Intelligence</span>' : '') +
+    (m.live === false ? '<span class="badge old">업데이트 종료</span>' : '');
+}
+
+function openModal(m){
+  curM = m;
+  lastFocus = document.activeElement;
+  $('mart').innerHTML = '';
+  $('mart').appendChild(phoneEl(m, 26));
+  $('myear').textContent = m.y + '년 출시 · ' + (m.brand === 'galaxy' ? 'Samsung' : 'Apple');
+  $('mname').textContent = m.n;
+  $('mtag').textContent = m.tag;
+  $('mbadges').innerHTML = badgeHTML(m);
+  $('mdesc').textContent = m.desc;
+  $('mgood').innerHTML = (m.good || []).map(x => '<li>' + x + '</li>').join('');
+  $('mbad').innerHTML  = (m.bad  || []).map(x => '<li>' + x + '</li>').join('');
+  $('mspec').innerHTML = [
+    ['화면', m.inch + '″ · ' + m.hz + 'Hz'], ['무게', m.g + 'g'], ['두께', m.mm + 'mm'], ['칩', m.chip],
+    ['카메라', m.cam], ['망원', m.zoom], ['배터리', m.batt + '시간 (영상 재생)'],
+    ['단자', m.port], ['화면 위쪽', special(m)], ['iOS', m.ios],
+    ['출시가', priceTxt(m)]
+  ].map(([k, v]) => '<dt>' + k + '</dt><dd>' + v + '</dd>').join('');
+  $('modal').hidden = false;
+  document.body.classList.add('locked');
+  $('mclose').focus();
+}
+
+function closeModal(){
+  $('modal').hidden = true;
+  document.body.classList.remove('locked');
+  if (lastFocus) lastFocus.focus();
+}
+
+$('mclose').onclick = closeModal;
+$('mbg').onclick = closeModal;
+$('mvs').onclick = () => {
+  if (!curM) return;
+  pickA = curM.id;
+  if (mode === 'gx' && !byId(pickB)) pickB = 's25u';
+  renderVS();
+  closeModal();
+  go('versus');
+};
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('modal').hidden) closeModal();
+});
+
+/* ---------- 스티브 잡스 ---------- */
+const JLIFE = [
+ ['1955','캘리포니아에서 태어나 곧바로 다른 가정에 입양됩니다.'],
+ ['1976','스물한 살에 스티브 워즈니악과 함께 차고에서 애플을 세웁니다.'],
+ ['1984','매킨토시를 발표합니다. 마우스로 쓰는 컴퓨터의 시작이었습니다.'],
+ ['1985','회사와 크게 부딪친 끝에, 자기가 만든 애플에서 밀려납니다.'],
+ ['1986','넥스트를 세우고, 픽사를 사들입니다. 그 픽사가 토이 스토리를 만듭니다.'],
+ ['1997','망하기 직전이던 애플로 돌아옵니다. 12년 만이었습니다.'],
+ ['2001','아이팟을 내놓습니다. "주머니 속에 노래 1,000곡."'],
+ ['2007','아이폰을 발표합니다. 전화기의 모양이 완전히 바뀝니다.'],
+ ['2010','아이패드를 내놓습니다.'],
+ ['2011','8월에 CEO에서 물러나고, 10월 5일 56세로 세상을 떠납니다.']
+];
+const JSAY = [
+ ['디자인은 어떻게 보이고 어떻게 느껴지느냐만이 아닙니다. 디자인은 <b>어떻게 작동하느냐</b>입니다.',
+  'Design is not just what it looks like and feels like. Design is how it works. · 뉴욕타임스 매거진, 2003'],
+ ['단순함은 복잡함보다 어렵습니다. 생각을 깨끗이 정리해야 단순해지기 때문입니다.',
+  'Simple can be harder than complex… · 비즈니스위크, 1998'],
+ ['여러분의 시간은 한정돼 있습니다. 그러니 남의 인생을 사느라 낭비하지 마세요.',
+  "Your time is limited, so don't waste it living someone else's life. · 스탠퍼드대 졸업식, 2005"],
+ ['늘 갈망하고, 우직하게 나아가십시오.',
+  'Stay hungry. Stay foolish. · 스탠퍼드대 졸업식, 2005 (원래는 잡지 「홀 어스 카탈로그」의 마지막 문장입니다)']
+];
+$('jlife').innerHTML = JLIFE.map(([y, t]) => '<div><b>' + y + '</b><span>' + t + '</span></div>').join('');
+$('jsay').innerHTML  = JSAY.map(([ko, en]) =>
+  '<figure><q>' + ko + '</q><figcaption>' + en + '</figcaption></figure>').join('');
+
+/* 잡스가 직접 발표한 네 대 — 누르면 상세 창이 열립니다 */
+['2g','3g','3gs','4'].forEach(id => {
+  const m = M.find(x => x.id === id);
+  const b = document.createElement('button');
+  b.className = 'jitem'; b.type = 'button';
+  b.appendChild(phoneEl(m, 12));
+  const cap = document.createElement('div');
+  cap.innerHTML = '<b>' + m.n + '</b><br><span>' + m.y + '</span>';
+  b.appendChild(cap);
+  b.onclick = () => openModal(m);
+  $('jphones').appendChild(b);
+});
+
+/* ---------- iOS의 역사 ---------- */
+const OS = [
+ ['iPhone OS 1','2007','전부 여기서 시작됐습니다','손가락으로 밀고 오므려 확대하는 멀티터치, 진짜 웹을 그대로 보여 주는 사파리, 음성 메시지를 목록으로 보는 비주얼 보이스메일이 들어 있었습니다. 대신 앱스토어도, 복사·붙여넣기도, 배경화면 변경도 없었습니다.','iPhone (1세대)'],
+ ['iPhone OS 2','2008','앱스토어가 문을 열다','남이 만든 앱을 내려받아 쓴다는 개념이 처음 생겼습니다. 스마트폰이 "전화기"에서 "무엇이든 할 수 있는 기계"로 바뀐 순간입니다.','iPhone 3G'],
+ ['iPhone OS 3','2009','복사·붙여넣기가 생기다','지금은 너무 당연한 복사·붙여넣기가 2년 만에 들어왔습니다. 검색(스포트라이트), MMS, 동영상 촬영도 이때부터입니다.','iPhone 3GS'],
+ ['iOS 4','2010','이름이 iOS로 바뀌다','앱을 껐다 켜도 이어서 쓰는 멀티태스킹과 앱 폴더가 생겼습니다. 배경화면을 바꿀 수 있게 됐고, 페이스타임도 시작됐습니다.','iPhone 4'],
+ ['iOS 5','2011','아이폰이 컴퓨터에서 독립하다','전에는 아이폰을 사면 PC에 꽂아야 켜졌습니다. iOS 5부터 아이폰 혼자서 설정이 끝납니다. 알림 센터, iMessage, iCloud, 시리도 이때입니다.','iPhone 4S'],
+ ['iOS 6','2012','애플 지도, 그리고 공개 사과','구글 지도를 빼고 직접 만든 지도를 넣었는데 품질이 형편없었습니다. 팀 쿡이 공개 사과문을 낼 정도였습니다.','iPhone 5'],
+ ['iOS 7','2013','디자인이 통째로 뒤집히다','가죽과 나무 질감으로 진짜 물건처럼 꾸미던 디자인을 버리고, 납작하고 얇고 투명한 디자인으로 바꿨습니다. 아이폰 역사상 가장 큰 변화로 꼽힙니다. 제어 센터와 에어드롭도 이때 생겼습니다.','iPhone 5s · 5c'],
+ ['iOS 8','2014','다른 앱에게 문을 열다','다른 회사가 만든 키보드를 쓰고 위젯을 띄울 수 있게 됐습니다. 애플 페이와 건강 앱, 맥과 이어서 작업하는 핸드오프도 시작됐습니다.','iPhone 6 · 6 Plus'],
+ ['iOS 9','2015','배터리를 아끼기 시작하다','저전력 모드가 생겨 배터리가 급할 때 버틸 수 있게 됐습니다. 밤에 화면을 따뜻한 색으로 바꿔 주는 나이트 시프트도 이때입니다.','iPhone 6s · 6s Plus'],
+ ['iOS 10','2016','기본 앱을 지울 수 있게 되다','애플이 넣어 둔 앱을 사용자가 지울 수 있게 됐습니다. 메시지 앱에 스티커와 화면 효과가 대거 들어와 대화가 훨씬 재밌어졌습니다.','iPhone 7 · 7 Plus'],
+ ['iOS 11','2017','파일 앱, 그리고 32비트와의 작별','아이폰에도 파일 앱이 생겼습니다. 대신 오래된 32비트 앱이 전부 작동을 멈춰서, 추억의 게임들이 많이 사라졌습니다.','iPhone 8 · X'],
+ ['iOS 12','2018','느려진 구형 기기를 되살리다','새 기능보다 속도에 집중한 버전입니다. 아이폰 5s 같은 오래된 기기가 눈에 띄게 빨라졌습니다. 스크린 타임과 단축어도 이때입니다.','iPhone XS · XR'],
+ ['iOS 13','2019','드디어 다크 모드','화면 전체를 어둡게 바꾸는 다크 모드가 들어왔습니다. 키보드를 쓸어서 입력하는 방식과 "애플로 로그인"도 시작됐습니다.','iPhone 11 시리즈'],
+ ['iOS 14','2020','홈 화면을 내 마음대로','홈 화면에 위젯을 놓을 수 있게 되면서 사람마다 홈 화면이 완전히 달라졌습니다. 영상을 작게 띄워 두는 그림 속 그림도 추가됐습니다.','iPhone 12 시리즈'],
+ ['iOS 15','2021','사진 속 글자를 읽다','카메라로 비춘 글자를 그대로 복사할 수 있는 라이브 텍스트가 생겼습니다. 알림을 상황별로 걸러 주는 집중 모드도 이때입니다.','iPhone 13 시리즈'],
+ ['iOS 16','2022','잠금화면이 달라지다','잠금화면에 글꼴과 위젯을 넣어 꾸밀 수 있게 됐습니다. 보낸 메시지를 취소하거나 고치는 기능, 사진에서 인물만 오려 내는 기능도 생겼습니다.','iPhone 14 시리즈'],
+ ['iOS 17','2023','충전 중에도 쓸모 있게','충전기에 꽂아 눕히면 탁상시계가 되는 스탠바이가 생겼습니다. 전화를 걸면 상대 화면에 뜨는 연락처 포스터도 이때 추가됐습니다.','iPhone 15 시리즈'],
+ ['iOS 18','2024','아이폰이 AI를 하다','앱 아이콘을 원하는 자리에 자유롭게 놓을 수 있게 됐습니다. 글을 다듬고 사진에서 물건을 지우는 애플 인텔리전스가 시작됐습니다.','iPhone 16 시리즈'],
+ ['iOS 26','2025','번호가 18에서 26으로 뛰다','버전 번호를 연도에 맞추기로 하면서 19를 건너뛰고 26이 됐습니다. 유리처럼 비치는 리퀴드 글래스 디자인으로 바뀌었고, 실시간 통역이 들어왔습니다.','iPhone 17 시리즈']
+];
+$('osgrid').innerHTML = OS.map(([ver, yr, head, body, withPhone]) =>
+  '<div class="oscard">' +
+    '<div class="oshead"><span class="osver">' + ver + '</span><span class="osyr">' + yr + '</span></div>' +
+    '<h3>' + head + '</h3>' +
+    '<p>' + body + '</p>' +
+    '<div class="oswith">함께 나온 아이폰 — <b>' + withPhone + '</b></div>' +
+  '</div>').join('');
+
+/* ---------- 연대기 ---------- */
+const TL = [
+ [2014, '화면이 커졌습니다', 'iPhone 6 / 6 Plus — 4인치를 벗어나 4.7과 5.5인치로 커졌습니다. 애플이 "큰 폰"을 처음 인정한 해입니다.'],
+ [2015, '누르는 세기를 알아챘습니다', 'iPhone 6s — 3D 터치와 12MP 카메라, 4K 영상 촬영이 시작됐습니다.'],
+ [2016, '이어폰 구멍이 사라지고, 렌즈가 둘이 됐습니다', 'iPhone 7 / 7 Plus — 첫 방수, 첫 듀얼 카메라, 첫 인물사진 모드가 나왔습니다. 3.5mm 단자는 여기서 끝입니다.'],
+ [2017, '홈버튼이 사라졌습니다', 'iPhone X — Face ID, 노치, OLED가 한꺼번에 등장했습니다. 지금 아이폰 생김새의 출발점입니다. 같은 해 iPhone 8은 무선 충전을 처음 넣었습니다.'],
+ [2018, 'Max가 생겼습니다', 'iPhone XS Max — 6.5인치입니다. 같은 해 XR은 6가지 색으로 나와 아이폰에 컬러 시대를 열었습니다.'],
+ [2019, '초광각과 야간 모드', 'iPhone 11 — 넓게 담는 초광각 렌즈와, 어두운 데서도 밝게 찍는 야간 모드가 처음 들어왔습니다.'],
+ [2020, '5G와 각진 몸, 그리고 자석', 'iPhone 12 — 5G, 각진 옆면, MagSafe 자석 충전이 동시에 들어왔습니다. 12 mini는 가장 작은 최신 아이폰이 됐습니다.'],
+ [2021, '화면이 부드러워졌습니다', 'iPhone 13 Pro — 120Hz ProMotion 첫 탑재입니다. 스크롤이 눈에 띄게 매끄러워졌습니다.'],
+ [2022, '검은 알약과 48MP', 'iPhone 14 Pro — 다이내믹 아일랜드와 48MP 메인 카메라, 상시 표시 디스플레이가 처음 들어왔습니다.'],
+ [2023, '케이블이 통일됐습니다', 'iPhone 15 — 라이트닝을 버리고 USB-C로 바뀌었습니다. 15 Pro Max는 5배 망원을 넣었고, Pro는 티타늄이 됐습니다.'],
+ [2024, '아이폰이 AI를 하기 시작했습니다', 'iPhone 16 — Apple Intelligence와 카메라 컨트롤 버튼이 나왔습니다. Pro Max는 6.9인치로 커졌습니다.'],
+ [2025, '기본형도 120Hz, 그리고 5.6mm', 'iPhone 17 — 드디어 기본 모델에도 120Hz가 들어왔습니다. iPhone Air는 두께 5.6mm로 역대 가장 얇은 아이폰이 됐습니다.']
+];
+$('tl').innerHTML = TL.map(([y, h, p]) =>
+  '<div class="tlrow"><span class="yr">' + y + '</span><div><h3>' + h + '</h3><p>' + p + '</p></div></div>').join('');
+
+/* ---------- 비교표 ---------- */
+$('tbody').innerHTML = M.map(m =>
+  '<tr class="' + (m.live ? '' : 'dim') + '">' +
+  '<td class="nm">' + m.n + '</td>' +
+  '<td class="mono">' + m.y + '</td>' +
+  '<td class="mono">' + m.inch + '″</td>' +
+  '<td class="mono">' + m.g + 'g</td>' +
+  '<td class="mono">' + m.mm + 'mm</td>' +
+  '<td>' + m.chip + '</td>' +
+  '<td class="mono">' + m.hz + 'Hz</td>' +
+  '<td>' + m.cam + '</td>' +
+  '<td>' + m.zoom + '</td>' +
+  '<td class="mono">' + m.batt + 'h</td>' +
+  '<td>' + m.port + '</td>' +
+  '<td>' + m.ios + '</td>' +
+  '<td class="mono">' + priceTxt(m) + '</td>' +
+  '</tr>').join('');
+
+
+/* ================= 갤럭시 ================= */
+/* 삼성은 배터리를 mAh로, 애플은 영상 재생 시간으로 밝혀서 배터리는 직접 비교가 불가능합니다. */
+const G = [
+{id:'a55',n:'Galaxy A55',brand:'galaxy',grp:'가성비 A 시리즈',y:2024,inch:6.6,g:213,mm:8.2,chip:'Exynos 1480',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 5MP 접사',zoom:'망원 없음',mah:5000,price:59,port:'USB-C',os:'Android',
+ c:4.5,z:1,p:3,sp:'가격 대비 큰 화면',tag:'가장 저렴한 갤럭시'},
+{id:'a56',n:'Galaxy A56',brand:'galaxy',grp:'가성비 A 시리즈',y:2025,inch:6.7,g:198,mm:7.4,chip:'Exynos 1580',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 5MP 접사',zoom:'망원 없음',mah:5000,price:60,port:'USB-C',os:'Android',
+ c:5,z:1,p:3.2,sp:'6년 OS 업데이트 약속',tag:'가성비 대표주자'},
+{id:'s22',n:'Galaxy S22',brand:'galaxy',grp:'Galaxy S 시리즈',y:2022,inch:6.1,g:167,mm:7.6,chip:'Snapdragon 8 Gen 1',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:3700,price:100,port:'USB-C',os:'Android',
+ c:6,z:6.5,p:4.5,sp:'작고 가벼운 플래그십',tag:'작지만 망원이 있다'},
+{id:'s22p',n:'Galaxy S22+',brand:'galaxy',grp:'Galaxy S 시리즈',y:2022,inch:6.6,g:195,mm:7.6,chip:'Snapdragon 8 Gen 1',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4500,price:120,port:'USB-C',os:'Android',
+ c:6,z:6.5,p:4.5,sp:'대화면 + 3배 망원',tag:'S22의 큰 형'},
+{id:'s22u',n:'Galaxy S22 Ultra',brand:'galaxy',grp:'Galaxy S 시리즈',y:2022,inch:6.8,g:229,mm:8.9,chip:'Snapdragon 8 Gen 1',hz:120,lens:4,cam:'108MP + 12MP 초광각 + 10MP 3배 + 10MP 10배',zoom:'3배 · 10배 광학',mah:5000,price:145,port:'USB-C',os:'Android',
+ c:8,z:10,p:4.5,sp:'S펜 내장 (노트 부활)',tag:'갤럭시 노트가 합쳐진 해'},
+{id:'s23',n:'Galaxy S23',brand:'galaxy',grp:'Galaxy S 시리즈',y:2023,inch:6.1,g:168,mm:7.6,chip:'Snapdragon 8 Gen 2',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:3900,price:116,port:'USB-C',os:'Android',
+ c:6.5,z:6.5,p:5.3,sp:'작은 크기에 3배 망원',tag:'6.1인치 망원 소형폰'},
+{id:'s23p',n:'Galaxy S23+',brand:'galaxy',grp:'Galaxy S 시리즈',y:2023,inch:6.6,g:196,mm:7.6,chip:'Snapdragon 8 Gen 2',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4700,price:135,port:'USB-C',os:'Android',
+ c:6.5,z:6.5,p:5.3,sp:'4700mAh 대용량',tag:'배터리가 넉넉한 중간형'},
+{id:'s23u',n:'Galaxy S23 Ultra',brand:'galaxy',grp:'Galaxy S 시리즈',y:2023,inch:6.8,g:234,mm:8.9,chip:'Snapdragon 8 Gen 2',hz:120,lens:4,cam:'200MP + 12MP 초광각 + 10MP 3배 + 10MP 10배',zoom:'3배 · 10배 광학',mah:5000,price:160,port:'USB-C',os:'Android',
+ c:9,z:10,p:5.3,sp:'200MP 카메라 + S펜',tag:'10배 광학 망원의 끝판왕'},
+{id:'s24',n:'Galaxy S24',brand:'galaxy',grp:'Galaxy S 시리즈',y:2024,inch:6.2,g:167,mm:7.6,chip:'Snapdragon 8 Gen 3 / Exynos 2400',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4000,price:116,port:'USB-C',os:'Android',
+ c:7,z:6.5,p:6,sp:'갤럭시 AI 첫 탑재',tag:'AI가 처음 들어온 해'},
+{id:'s24p',n:'Galaxy S24+',brand:'galaxy',grp:'Galaxy S 시리즈',y:2024,inch:6.7,g:196,mm:7.7,chip:'Snapdragon 8 Gen 3 / Exynos 2400',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4900,price:135,port:'USB-C',os:'Android',
+ c:7,z:6.5,p:6,sp:'4900mAh + QHD 화면',tag:'화질과 배터리 다 잡은 중간형'},
+{id:'s24u',n:'Galaxy S24 Ultra',brand:'galaxy',grp:'Galaxy S 시리즈',y:2024,inch:6.8,g:232,mm:8.6,chip:'Snapdragon 8 Gen 3',hz:120,lens:4,cam:'200MP + 12MP 초광각 + 10MP 3배 + 50MP 5배',zoom:'3배 · 5배 광학',mah:5000,price:170,port:'USB-C',os:'Android',
+ c:9.5,z:9.5,p:6.5,sp:'티타늄 + S펜 내장',tag:'티타늄으로 바뀐 울트라'},
+{id:'s25',n:'Galaxy S25',brand:'galaxy',grp:'Galaxy S 시리즈',y:2025,inch:6.2,g:162,mm:7.2,chip:'Snapdragon 8 Elite',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4000,price:116,port:'USB-C',os:'Android',
+ c:7.5,z:6.5,p:8.5,sp:'162g. 플래그십 최경량급',tag:'가장 가벼운 최신 갤럭시'},
+{id:'s25p',n:'Galaxy S25+',brand:'galaxy',grp:'Galaxy S 시리즈',y:2025,inch:6.7,g:190,mm:7.3,chip:'Snapdragon 8 Elite',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4900,price:135,port:'USB-C',os:'Android',
+ c:7.5,z:6.5,p:8.5,sp:'대화면인데 190g',tag:'큰데 가벼운 균형형'},
+{id:'s25u',n:'Galaxy S25 Ultra',brand:'galaxy',grp:'Galaxy S 시리즈',y:2025,inch:6.9,g:218,mm:8.2,chip:'Snapdragon 8 Elite',hz:120,lens:4,cam:'200MP + 50MP 초광각 + 10MP 3배 + 50MP 5배',zoom:'3배 · 5배 광학',mah:5000,price:170,port:'USB-C',os:'Android',
+ c:10,z:9.5,p:8.5,sp:'S펜 내장 + 렌즈 4개',tag:'안드로이드 최강'},
+{id:'s25e',n:'Galaxy S25 Edge',brand:'galaxy',grp:'Galaxy S 시리즈',y:2025,inch:6.7,g:163,mm:5.8,chip:'Snapdragon 8 Elite',hz:120,lens:2,cam:'200MP + 12MP 초광각',zoom:'망원 없음',mah:3900,price:150,port:'USB-C',os:'Android',
+ c:8,z:3,p:8.5,sp:'두께 5.8mm',tag:'아이폰 에어의 맞수'},
+{id:'zfl6',n:'Galaxy Z Flip 6',brand:'galaxy',grp:'접히는 폴더블',y:2024,inch:6.7,r:0.44,g:187,mm:6.9,mmFold:14.9,chip:'Snapdragon 8 Gen 3',hz:120,lens:2,cam:'50MP + 12MP 초광각',zoom:'망원 없음',mah:4000,price:140,port:'USB-C',os:'Android',
+ c:6,z:3,p:6.5,sp:'반으로 접힘 (외부 3.4″)',tag:'조개처럼 접히는 폰'},
+{id:'zfl7',n:'Galaxy Z Flip 7',brand:'galaxy',grp:'접히는 폴더블',y:2025,inch:6.9,r:0.44,g:188,mm:6.5,mmFold:13.7,chip:'Exynos 2500',hz:120,lens:2,cam:'50MP + 12MP 초광각',zoom:'망원 없음',mah:4300,price:149,port:'USB-C',os:'Android',
+ c:6.5,z:3,p:7,sp:'외부 화면 4.1″로 커짐',tag:'접었을 때도 다 되는 폰'},
+{id:'zfo6',n:'Galaxy Z Fold 6',brand:'galaxy',grp:'접히는 폴더블',y:2024,inch:7.6,r:0.88,g:239,mm:5.6,mmFold:12.1,chip:'Snapdragon 8 Gen 3',hz:120,lens:3,cam:'50MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4400,price:223,port:'USB-C',os:'Android',
+ c:7,z:6.5,p:6.5,sp:'펼치면 7.6″ 태블릿',tag:'책처럼 펼쳐지는 폰'},
+{id:'zfo7',n:'Galaxy Z Fold 7',brand:'galaxy',grp:'접히는 폴더블',y:2025,inch:8.0,r:0.88,g:215,mm:4.2,mmFold:8.9,chip:'Snapdragon 8 Elite',hz:120,lens:3,cam:'200MP + 12MP 초광각 + 10MP 망원',zoom:'3배 광학',mah:4400,price:237,port:'USB-C',os:'Android',
+ c:8.5,z:6.5,p:8.5,sp:'펼치면 8.0″ · 215g',tag:'가장 얇아진 폴드'}
+];
+
+/* ---------- 맞대결 ---------- */
+const GRP = {origin:'오리지널 2007–13', vintage:'빈티지 2014–17', classic:'클래식 2018–20', modern:'2021–23', latest:'최신 2024–25'};
+const SP = {air:'두께 5.6mm. 역대 가장 얇은 아이폰', '17p':'베이퍼 챔버 냉각', '17pm':'베이퍼 챔버 냉각',
+  '15p':'티타늄 + 액션 버튼', '15pm':'티타늄 + 5배 망원', '16':'카메라 컨트롤 버튼',
+  '16pl':'카메라 컨트롤 버튼', '16p':'카메라 컨트롤 버튼', '16pm':'카메라 컨트롤 버튼',
+  '14p':'다이내믹 아일랜드 최초', '14pm':'다이내믹 아일랜드 최초', '13p':'120Hz 최초', '13pm':'120Hz 최초',
+  x:'Face ID 최초', '7p':'듀얼 카메라 최초', '7':'방수 최초', '8':'무선 충전 최초', '8p':'무선 충전 + 듀얼',
+  se1:'4인치 · 113g', '12m':'각진 디자인 + MagSafe', '12pm':'센서 시프트 손떨림 보정'};
+/* 터치 ID는 2013년 아이폰 5s부터입니다. 그 전 홈버튼에는 지문 인식이 없었습니다. */
+const special = m => m.sp || SP[m.id] ||
+  (m.home ? (m.y >= 2014 ? '홈버튼 + 터치 ID' : '홈버튼 (터치 ID 없음)')
+          : m.isl === 'island' ? '다이내믹 아일랜드' : '노치 + Face ID');
+const battTxt = m => m.brand === 'galaxy' ? m.mah + 'mAh' : m.batt + '시간 (영상)';
+/* 전체 비교표가 이 줄보다 먼저 실행되므로, 끌어올려지는 function 선언으로 둡니다 */
+function priceTxt(m){ return m.pn || (m.price + '만원'); }
+
+const ROWS = [
+ {k:'출시', g:m => m.y + '년'},
+ {k:'화면', g:m => m.inch + '″ · ' + m.hz + 'Hz', c:(a,b) => a.inch - b.inch, w:'더 큼'},
+ {k:'무게', g:m => m.g + 'g', c:(a,b) => b.g - a.g, w:'더 가벼움'},
+ {k:'두께', g:m => m.mm + 'mm' + (m.mmFold ? ' (접으면 ' + m.mmFold + 'mm)' : ''), c:(a,b) => b.mm - a.mm, w:'더 얇음'},
+ {k:'칩', g:m => m.chip, c:(a,b) => a.p - b.p, w:'더 빠름'},
+ {k:'카메라', g:m => m.cam, c:(a,b) => a.c - b.c, w:'더 좋음'},
+ {k:'망원', g:m => m.zoom, c:(a,b) => a.z - b.z, w:'더 당겨짐'},
+ {k:'배터리', g:battTxt, c:(a,b) => a.brand === b.brand ? (a.brand === 'galaxy' ? a.mah - b.mah : a.batt - b.batt) : 0, w:'더 오래감',
+  note:(a,b) => a.brand === b.brand ? '' : '※ 애플은 mAh를, 삼성은 영상 재생 시간을 밝히지 않습니다. 배터리는 직접 비교할 수 없습니다.'},
+ {k:'단자', g:m => m.port},
+ {k:'운영체제', g:m => m.brand === 'galaxy' ? m.os : m.ios},
+ {k:'특이점', g:special},
+ {k:'출시가', g:priceTxt, c:(a,b) => b.price - a.price, w:'더 저렴'}
+];
+
+const MODES = [['ip','아이폰 vs 아이폰'], ['gx','아이폰 vs 갤럭시']];
+const PRESETS = {
+  ip:[['17','17p','일반이냐 프로냐'], ['16','17','한 세대 차이'], ['se3','16e','싼 거 대결'],
+      ['13m','air','최경량 대결'], ['x','17','Face ID 8년의 변화'], ['6','17pm','11년의 차이']],
+  gx:[['17pm','s25u','최강 대결'], ['air','s25e','얇기 대결'], ['17','s25','기본형 대결'],
+      ['16e','a56','가성비 대결'], ['16p','s24u','카메라 대결'], ['13m','zfl7','작은 폰 대결']]
+};
+
+let mode = 'gx', pickA = '17pm', pickB = 's25u';
+const byId = id => M.concat(G).find(m => m.id === id);
+
+function fillSel(sel, list, cur){
+  sel.innerHTML = '';
+  const seen = [];
+  list.forEach(m => { if (!seen.includes(m.brand === 'galaxy' ? m.grp : GRP[m.era])) seen.push(m.brand === 'galaxy' ? m.grp : GRP[m.era]); });
+  seen.forEach(gname => {
+    const og = document.createElement('optgroup');
+    og.label = gname;
+    list.filter(m => (m.brand === 'galaxy' ? m.grp : GRP[m.era]) === gname).forEach(m => {
+      const o = document.createElement('option');
+      o.value = m.id; o.textContent = m.n;
+      if (m.id === cur) o.selected = true;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+}
+
+function renderVSchips(){
+  const mb = $('vsmode');
+  mb.innerHTML = '';
+  MODES.forEach(([v, label]) => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.textContent = label;
+    b.setAttribute('aria-pressed', mode === v);
+    b.onclick = () => {
+      if (mode === v) return;
+      mode = v;
+      const p = PRESETS[mode][0];
+      pickA = p[0]; pickB = p[1];
+      renderVSchips(); renderVS();
+    };
+    mb.appendChild(b);
+  });
+  const pb = $('presets');
+  pb.innerHTML = '';
+  PRESETS[mode].forEach(([a, b2, label]) => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.textContent = label;
+    b.onclick = () => { pickA = a; pickB = b2; renderVS(); };
+    pb.appendChild(b);
+  });
+}
+
+function summarize(a, b){
+  const pts = [
+    [a.g < b.g, '가벼움'], [a.mm < b.mm, '얇음'], [a.inch > b.inch, '큰 화면'], [a.c > b.c, '카메라'],
+    [a.z > b.z, '망원'], [a.p > b.p, '성능'], [a.price < b.price, '저렴함'], [a.hz > b.hz, '부드러운 화면']
+  ];
+  const rev = [
+    [b.g < a.g, '가벼움'], [b.mm < a.mm, '얇음'], [b.inch > a.inch, '큰 화면'], [b.c > a.c, '카메라'],
+    [b.z > a.z, '망원'], [b.p > a.p, '성능'], [b.price < a.price, '저렴함'], [b.hz > a.hz, '부드러운 화면']
+  ];
+  const aw = pts.filter(p => p[0]).map(p => p[1]);
+  const bw = rev.filter(p => p[0]).map(p => p[1]);
+  const line = (m, arr) => '<div class="sumrow"><b>' + m.n + '</b>가(이) 앞서는 점 — <i>' +
+    (arr.length ? arr.join(' · ') : '없음') + '</i></div>';
+  return line(a, aw) + line(b, bw);
+}
+
+function renderVS(){
+  const a = byId(pickA), b = byId(pickB);
+  fillSel($('selA'), M, pickA);
+  fillSel($('selB'), mode === 'gx' ? G : M, pickB);
+
+  $('glyphA').innerHTML = ''; $('glyphA').appendChild(phoneEl(a, 15));
+  $('glyphB').innerHTML = ''; $('glyphB').appendChild(phoneEl(b, 15));
+  $('nameA').textContent = a.n; $('nameB').textContent = b.n;
+  $('tagA').textContent = a.tag; $('tagB').textContent = b.tag;
+
+  /* 두께는 숫자만으로 와닿지 않아서, 실제 비율 막대로 함께 보여 줍니다.
+     1mm = 5.2px 고정 배율이라 어떤 조합을 골라도 서로 비교됩니다. */
+  const MMPX = 5.2;
+  const dmm = Math.abs(a.mm - b.mm).toFixed(2).replace(/\.?0+$/, '');
+  const thin = a.mm < b.mm ? a : b.mm < a.mm ? b : null;
+  $('thick').innerHTML =
+    '<span class="eyebrow">두께 비교 · 실제 비율</span>' +
+    [[a, ''], [b, ' b']].map(([m, cls]) =>
+      '<div class="throw">' +
+        '<span class="thname">' + m.n + '</span>' +
+        '<div class="thbar' + cls + '" style="height:' + (m.mm * MMPX).toFixed(1) + 'px"></div>' +
+        '<span class="thval">' + m.mm + 'mm' +
+          (m.mmFold ? '<small>접으면 ' + m.mmFold + 'mm</small>' : '') +
+        '</span>' +
+      '</div>').join('') +
+    '<p class="thnote">' + (thin
+      ? '<b>' + thin.n + '</b>이(가) ' + dmm + 'mm 더 얇습니다.'
+      : '두 기종의 두께가 <b>똑같습니다</b>.') + '</p>';
+
+  $('vsrows').innerHTML = ROWS.map(r => {
+    const va = r.g(a), vb = r.g(b);
+    const d = r.c ? r.c(a, b) : 0;
+    const wa = d > 0, wb = d < 0;
+    const note = r.note ? r.note(a, b) : '';
+    return '<div class="vsrow">' +
+      '<div class="vsval a' + (wa ? ' win' : '') + '">' + va + (wa ? '<span class="wn">' + r.w + '</span>' : '') + '</div>' +
+      '<div class="vsk">' + r.k + '</div>' +
+      '<div class="vsval b' + (wb ? ' win' : '') + '">' + vb + (wb ? '<span class="wn">' + r.w + '</span>' : '') + '</div>' +
+      (note ? '<div class="vsnote">' + note + '</div>' : '') +
+      '</div>';
+  }).join('');
+
+  $('vssum').innerHTML = summarize(a, b);
+}
+
+$('selA').onchange = e => { pickA = e.target.value; renderVS(); };
+$('selB').onchange = e => { pickB = e.target.value; renderVS(); };
+
+/* ---------- 시리의 역사 ---------- */
+const SIRI = [
+ ['2010','','애플이 사들인 앱',
+  '시리는 원래 애플 것이 아니었습니다. 앱스토어에 올라와 있던 독립 앱을, 애플이 회사째 사들였습니다.'],
+ ['2011','iPhone 4S · iOS 5','아이폰이 말을 알아듣다',
+  '아이폰 4S와 함께 등장했습니다. 이름 옆에는 "베타"가 붙어 있었고, 알아듣는 말은 영어와 프랑스어, 독일어뿐이었습니다.'],
+ ['2012','iOS 6','한국어를 알아듣다',
+  '드디어 한국어 지원. "베타" 딱지도 뗐습니다. 아이패드에서도 쓸 수 있게 됐고, 영화 시간과 스포츠 점수까지 답하기 시작했습니다.'],
+ ['2013','iOS 7','목소리를 고르다',
+  '남성 목소리가 추가됐습니다. 말로 기기 설정을 바꾸는 것도 이때부터입니다.'],
+ ['2014','iOS 8','"Hey Siri"',
+  '버튼을 누르지 않고 부르기만 해도 대답합니다. 다만 충전 중일 때만 됐습니다. 흘러나오는 노래 제목도 찾아 줍니다.'],
+ ['2015','iOS 9','먼저 말을 걸다',
+  '묻기 전에 먼저 제안하기 시작했습니다. "이거 나중에 알려 줘" 같은, 화면을 가리키는 말도 알아듣게 됐습니다.'],
+ ['2016','iOS 10','다른 앱을 부리다',
+  'SiriKit. 애플이 만들지 않은 앱도 시리로 조종할 수 있게 됐습니다. 메시지 보내기, 택시 부르기, 송금.'],
+ ['2017','iOS 11','사람처럼 말하다',
+  '기계가 읽는 소리에서 사람이 말하는 소리로 바뀌었습니다. 번역도 이때 시작됐습니다.'],
+ ['2018','iOS 12','단축어',
+  '내가 원하는 말을 시리에게 직접 가르칠 수 있게 됐습니다. 시리 역사상 가장 큰 변화로 꼽힙니다.'],
+ ['2019','iOS 13','통째로 만들어 낸 목소리',
+  '사람이 녹음한 소리를 이어 붙이던 방식을 버렸습니다. 이제 처음부터 끝까지 소프트웨어가 만들어 냅니다.'],
+ ['2020','iOS 14','화면을 덜 가리다',
+  '시리를 부르면 화면 전체가 덮이던 것이, 아래쪽의 작은 동그라미로 줄었습니다. 하던 일을 멈추지 않아도 됩니다.'],
+ ['2021','iOS 15','인터넷 없이도',
+  '말을 알아듣는 일을 아이폰 안에서 직접 처리하기 시작했습니다. 비행기 모드에서도 타이머는 됩니다.'],
+ ['2022','iOS 16','전화를 끊다',
+  '"시리야, 전화 끊어"가 되기 시작했습니다. 메시지도 한 번 더 확인하지 않고 바로 보냅니다.'],
+ ['2023','iOS 17','"Hey"를 떼다',
+  '이제 "시리야"만 불러도 됩니다. 한 번 부르고 여러 가지를 이어서 시킬 수도 있습니다.'],
+ ['2024','iOS 18','애플 인텔리전스',
+  '화면 테두리가 빛나는 모습으로 바뀌었습니다. 말하기 어려운 곳에서는 글로 시킬 수도 있게 됐습니다.'],
+ ['2025','iOS 26','아직 오지 않은 시리',
+  '애플이 예고했던 "내 정보를 아는 시리"는 아직 도착하지 않았습니다. 더 시간이 필요하다고, 애플도 인정했습니다.']
+];
+$('sirit').innerHTML = SIRI.map(([y, v, head, body]) =>
+  '<div class="siritem"><span class="yr">' + y + '</span>' +
+  (v ? '<span class="ver">' + v + '</span>' : '') +
+  '<h3>' + head + '</h3><p>' + body + '</p></div>').join('') +
+  '<p class="jnote" style="margin-left:0">여기까지가 2025년입니다. 그 뒤 이야기는 직접 확인해 보세요.</p>';
+
+/* ---------- 이스터에그 · 애플 컬렉션 ----------
+   서명을 누르면 열립니다. 기기 그림도 전부 코드로 그렸습니다. */
+const K = 'fill="var(--surface-2)" stroke="var(--ink-3)" stroke-width="1.6"';
+const D = 'fill="var(--ink-3)"';
+const ART = {
+  iphone:'<rect x="15" y="3" width="15" height="38" rx="3.6" ' + K + '/>' +
+         '<rect x="19.5" y="6" width="6" height="1.8" rx=".9" ' + D + '/>',
+  ipad:  '<rect x="9" y="4" width="26" height="36" rx="2.8" ' + K + '/>' +
+         '<rect x="11.5" y="8" width="21" height="25" rx="1" fill="none" stroke="var(--line)" stroke-width="1.2"/>' +
+         '<circle cx="22" cy="36.5" r="1.7" fill="none" stroke="var(--ink-3)" stroke-width="1.2"/>',
+  mac:   '<rect x="7" y="9" width="30" height="20" rx="2" ' + K + '/>' +
+         '<rect x="9" y="11" width="26" height="16" rx="1" fill="none" stroke="var(--line)" stroke-width="1.2"/>' +
+         '<path d="M3 31h38l-2.5 3.5h-33z" ' + K + '/>',
+  mouse: '<rect x="14" y="6" width="16" height="32" rx="8" ' + K + '/>' +
+         '<circle cx="22" cy="14" r="1.6" ' + D + '/>',
+  pods:  '<rect x="12" y="11" width="20" height="23" rx="5" ' + K + '/>' +
+         '<path d="M12 18h20" stroke="var(--line)" stroke-width="1.2" fill="none"/>' +
+         '<rect x="16" y="21" width="3.6" height="9" rx="1.8" ' + D + '/>' +
+         '<rect x="24.4" y="21" width="3.6" height="9" rx="1.8" ' + D + '/>',
+  watch: '<rect x="16" y="3" width="12" height="9" rx="2.5" ' + D + ' opacity=".5"/>' +
+         '<rect x="16" y="32" width="12" height="9" rx="2.5" ' + D + ' opacity=".5"/>' +
+         '<rect x="13" y="11" width="18" height="22" rx="5" ' + K + '/>' +
+         '<rect x="31" y="18" width="2.2" height="5" rx="1.1" ' + D + '/>'
+};
+const COLLECTION = [
+ ['iphone','아이폰 SE 3세대','첫 아이폰. 보상판매로 떠나보냈습니다'],
+ ['iphone','아이폰 17','지금 쓰는 폰'],
+ ['iphone','아이폰 5','라이트닝과 4인치가 시작된 기종'],
+ ['iphone','아이폰 5s','터치 ID를 처음 넣은 기종'],
+ ['iphone','아이폰 6s','3D 터치가 있던 시절'],
+ ['ipad','아이패드 3세대','레티나가 처음 들어간 아이패드'],
+ ['mac','맥북 네오','13인치 노트북 중 가장 가벼운 노트북'],
+ ['mouse','매직마우스 2','충전 단자가 바닥에 있는 그 마우스'],
+ ['pods','에어팟 프로','노이즈 캔슬링 1세대'],
+ ['pods','에어팟 프로 3','가장 최근에 나온 에어팟'],
+ ['watch','애플워치 시리즈 4','화면이 커지고 심전도가 들어간 세대']
+];
+
+$('eggSub').textContent = '지금까지 ' + COLLECTION.length + '대. 아이폰만 ' +
+  COLLECTION.filter(c => c[0] === 'iphone').length + '대입니다.';
+$('egggrid').innerHTML = COLLECTION.map(([k, name, note]) =>
+  '<div class="eggitem">' +
+    '<svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true">' + ART[k] + '</svg>' +
+    '<div><b>' + name + '</b>' + (note ? '<span>' + note + '</span>' : '') + '</div>' +
+  '</div>').join('');
+
+function eggOpen(){ $('egg').hidden = false; document.body.classList.add('locked'); $('eggclose').focus(); }
+function eggClose(){ $('egg').hidden = true; document.body.classList.remove('locked'); $('sig').focus(); }
+$('sig').onclick = eggOpen;
+$('eggbg').onclick = eggClose;
+$('eggclose').onclick = eggClose;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('egg').hidden) eggClose(); });
+
+/* ---------- 화면 전환 ----------
+   한 장짜리 스크롤이 아니라, 메뉴에서 고른 화면 하나만 보여 줍니다.
+   주소창의 #이름으로 관리하므로 뒤로 가기 버튼도 그대로 동작합니다. */
+const VIEWS = [
+ /* id, 이름, 번호, 홈 화면 설명, 메뉴 격자에 쓸 짧은 이름 */
+ ['home',    '홈',           '',   '어떤 아이폰이 나에게 맞을까요?', '홈'],
+ ['quiz',    '추천 퀴즈',     '01', '여섯 가지 질문에 답하면 51기종 중 한 대를 골라 드립니다', '추천 퀴즈'],
+ ['index',   '기종 도감',     '02', '2007년 1세대부터 17 Pro Max까지, 51기종을 하나씩', '기종 도감'],
+ ['versus',  '맞대결',        '03', '아이폰끼리, 또는 갤럭시와 나란히 놓고 비교합니다', '맞대결'],
+ ['jobs',    '스티브 잡스',   '04', '2007년 그 무대와, 그가 남긴 말들', '스티브 잡스'],
+ ['history', '아이폰 연대기', '05', '그해 처음 등장한 기능들', '연대기'],
+ ['ios',     'iOS의 역사',    '06', 'iPhone OS 1부터 iOS 26까지', 'iOS 역사'],
+ ['siri',    '시리의 역사',   '07', '2011년부터 지금까지, 시리가 배운 것들', '시리 역사'],
+ ['compare', '한눈에 비교',   '08', '51기종 전체 스펙을 표 하나로', '전체 비교'],
+ ['words',   '용어 사전',     '09', 'ProMotion, Face ID, A칩… 어려운 말 풀이', '용어 사전'],
+ ['feedback','피드백',        '10', '보고 느낀 점을 남겨 주세요', '피드백']
+];
+
+$('menuPanel').innerHTML = VIEWS.map(([id, label, num, desc, short]) =>
+  '<a href="#' + id + '" data-view="' + id + '"><em>' + (num || '·') + '</em>' +
+  '<b>' + (short || label) + '</b></a>').join('');
+
+$('homegrid').innerHTML = VIEWS.filter(v => v[0] !== 'home').map(([id, label, num, desc]) =>
+  '<a class="hcard" href="#' + id + '"><em>' + num + '</em><b>' + label + '</b>' +
+  '<span>' + desc + '</span></a>').join('');
+
+function closeMenu(){ $('menuPanel').hidden = true; $('menuBtn').setAttribute('aria-expanded', 'false'); }
+function openMenu(){ $('menuPanel').hidden = false; $('menuBtn').setAttribute('aria-expanded', 'true'); }
+
+function show(id){
+  const cur = VIEWS.find(v => v[0] === id) || VIEWS[0];
+  VIEWS.forEach(([v]) => { const el = $(v); if (el) el.hidden = (v !== cur[0]); });
+  $('menuLabel').textContent = cur[1];
+  $('menuPanel').querySelectorAll('a').forEach(a =>
+    a.classList.toggle('on', a.dataset.view === cur[0]));
+  closeMenu();
+  window.scrollTo(0, 0);
+}
+function go(id){ location.hash = '#' + id; show(id); }
+
+$('menuBtn').onclick = e => { e.stopPropagation(); $('menuPanel').hidden ? openMenu() : closeMenu(); };
+/* 아이폰 사파리는 문서 전체에 건 click 을 흘리지 않을 때가 있어 pointerdown 을 씁니다 */
+document.addEventListener('pointerdown', e => { if (!e.target.closest('.menu')) closeMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+
+/* ---------- 피드백 ----------
+   claude.ai 댓글은 로그인한 사람만, 그것도 댓글 권한이 있을 때만 쓸 수 있습니다.
+   계정 없는 사람도 의견을 남길 수 있도록, 적은 내용을 정리해 클립보드에 복사해 줍니다.
+   댓글 기능이 살아 있는 사람에게는 버튼이 하나 더 나타납니다. */
+const FB = ['전체적인 느낌', '추천 퀴즈', '기종 정보', '디자인과 사용법', '넣었으면 하는 것', '그 밖의 이야기'];
+let fbApi = null;
+
+$('fbTopic').innerHTML = FB.map(t => '<option>' + t + '</option>').join('');
+const fbSay = (msg, warn) => {
+  $('fbnote').innerHTML = '<p class="fbnote' + (warn ? ' warn' : '') + '">' + msg + '</p>';
+};
+fbSay('적으신 내용은 이 페이지 밖으로 저절로 나가지 않습니다. 복사 버튼을 눌러야 손에 들어옵니다.');
+
+function fbCompose(){
+  const text = $('fbText').value.trim();
+  if (!text){ $('fbText').focus(); fbSay('하고 싶은 말을 먼저 적어 주세요.', true); return null; }
+  const name = $('fbName').value.trim();
+  return '[아이폰 고르기 피드백] ' + $('fbTopic').value + '\n'
+       + (name ? '보낸 사람: ' + name + '\n' : '') + '\n' + text;
+}
+
+async function fbCopyText(msg){
+  try {
+    await navigator.clipboard.writeText(msg);
+    return true;
+  } catch (e) {
+    const out = $('fbout');
+    out.value = msg; out.hidden = false; out.focus(); out.select();
+    return false;
+  }
+}
+
+$('fbCopy').onclick = async () => {
+  const msg = fbCompose();
+  if (!msg) return;
+  const ok = await fbCopyText(msg);
+  fbSay(ok
+    ? '복사했습니다. 카톡이나 메시지에 <b>붙여넣기</b> 해서 보내 주세요. 고맙습니다.'
+    : '자동 복사가 막혀 있습니다. 아래 칸의 글을 <b>직접 복사</b>해서 보내 주세요.');
+};
+
+$('fbComment').onclick = async () => {
+  const msg = fbCompose();
+  if (!msg || !fbApi) return;
+  const ok = await fbCopyText(msg);
+  try {
+    const r = await fbApi.openComposer({ element: $('feedback') });
+    fbSay(r.opened
+      ? '댓글 창이 열렸습니다. ' + (ok ? '<b>붙여넣기</b> 하고 보내 주세요.' : '아래 칸의 글을 복사해 붙여넣어 주세요.')
+      : '이미 쓰던 댓글 창이 열려 있습니다. 그 창에 붙여넣어 주세요.');
+  } catch (e) {
+    $('fbComment').hidden = true;
+    fbSay('댓글 창은 열 수 없었습니다. 복사한 내용을 보내 주세요.', true);
+  }
+};
+
+/* 댓글을 쓸 수 있는 사람에게만 두 번째 버튼을 보여 줍니다 */
+(async () => {
+  try { fbApi = (window.claude && window.claude.use) ? await window.claude.use('comments') : null; }
+  catch (e) { fbApi = null; }
+  if (fbApi) $('fbComment').hidden = false;
+})();
+
+showIntro();
+renderChips();
+renderGrid();
+renderVSchips();
+renderVS();
+show(location.hash.slice(1) || 'home');
+</script>
+</body>
+</html>
